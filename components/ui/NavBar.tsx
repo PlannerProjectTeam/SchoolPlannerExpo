@@ -22,7 +22,7 @@ import DropShadow from "@/node_modules/react-native-drop-shadow";
 import { SVG } from "@/components/graphical/SVG";
 
 // Custom
-import { globalStyles, Scheme } from "@/components/ui/globalStyles";
+import { globalStyles, Scheme } from "@/constants/globalStyles";
 import { CalendarProps } from "@/app/Calendar";
 
 export const NavBar = ({navigation} : CalendarProps) => {

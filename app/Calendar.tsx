@@ -20,8 +20,8 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParameters } from "./_layout";
 
 // Custom
-import { globalStyles, Scheme } from "@/components/ui/globalStyles";
-import { NavBar } from "@/components/NavBar";
+import { globalStyles, Scheme } from "@/constants/globalStyles";
+import { NavBar } from "@/components/ui/NavBar";
 
 export type CalendarProps = NativeStackScreenProps<RootStackParameters>;
 

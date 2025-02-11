@@ -27,7 +27,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParameters } from "./_layout";
 
 // Custom
-import { globalStyles, Scheme } from "@/components/ui/globalStyles";
+import { globalStyles, Scheme } from "@/constants/globalStyles";
 import { SVG } from "@/components/graphical/SVG";
 
 type ProfileProps = NativeStackScreenProps<RootStackParameters, 'Calendar'>
