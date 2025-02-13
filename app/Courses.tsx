@@ -18,3 +18,5 @@ export const Courses = () => {
         </View>
     )
 }
+
+export default Courses;

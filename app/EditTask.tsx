@@ -19,3 +19,5 @@ export const EditTask = () => {
         </View>
     )
 }
+
+export default EditTask;

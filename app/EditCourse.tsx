@@ -19,3 +19,5 @@ export const EditCourse = () => {
         </View>
     )
 }
+
+export default EditCourse;
