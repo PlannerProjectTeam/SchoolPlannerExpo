@@ -37,7 +37,7 @@ export const SVG = ({ svgUrl, color, stroke, width, height, fillRule, clipRule }
                     setViewBox(viewBoxMatch[1]);
                 }
             } catch (error) {
-                console.error("Error fetching SVG:", error);
+                console.error("Error", error);
             }
         };
 
@@ -46,7 +46,7 @@ export const SVG = ({ svgUrl, color, stroke, width, height, fillRule, clipRule }
 
 
     if (!svgData) {
-        return <View><Text>Loading SVG...</Text></View>;
+        return <View><Text>...</Text></View>;
     }
 
     const extractPathData = (svgString: string) => {
@@ -58,7 +58,7 @@ export const SVG = ({ svgUrl, color, stroke, width, height, fillRule, clipRule }
     const pathData = extractPathData(svgData)
 
     if (!pathData) {
-        console.warn("Could not extract path data from SVG")
+        console.warn("Error")
         return null
     }
 

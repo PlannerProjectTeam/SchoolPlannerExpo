@@ -2,6 +2,8 @@ import React, { PropsWithChildren } from "react"
 import { View, Text, StyleSheet, Pressable, Dimensions } from "react-native"
 import { globalStyles } from "@/constants/globalStyles"
 import { DotSVG } from "../graphics/svgs/SVGStash"
+import { Ionicons, Octicons } from "@expo/vector-icons"
+import { Scheme } from "@/constants/globalStyles"
 
 type ItemCardProps = PropsWithChildren<{
     color: string,
@@ -20,9 +22,9 @@ export const ItemCard =  ({color, title, subtitle, footer} : ItemCardProps) => {
             </View>
 
             <Pressable style={styles.optionsContainer}>
-                <DotSVG/> 
-                <DotSVG/> 
-                <DotSVG/>
+                <Octicons name="dot-fill" size={10} color={Scheme.darkPurple}/>
+                <Octicons name="dot-fill" size={10} color={Scheme.darkPurple}/>
+                <Octicons name="dot-fill" size={10} color={Scheme.darkPurple}/>
             </Pressable>
         </View>
     )
@@ -31,7 +33,7 @@ export const ItemCard =  ({color, title, subtitle, footer} : ItemCardProps) => {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        width: Dimensions.get('screen').width * 0.9,
+        width: Dimensions.get('window').width * 0.9,
         height: 100,
         justifyContent: 'flex-start',
         alignContent: 'center',
@@ -49,6 +51,6 @@ const styles = StyleSheet.create({
     optionsContainer: {
         flex: 0,
         justifyContent: 'center',
-        marginHorizontal: 10,
+        marginHorizontal: 15,
     },
 })

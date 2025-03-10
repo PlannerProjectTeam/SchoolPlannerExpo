@@ -29,6 +29,7 @@ import { RootStackParameters } from "./_layout";
 // Custom
 import { globalStyles, Scheme } from "@/constants/globalStyles";
 import { SVG } from "@/components/graphics/svgs/SVG";
+import { OpenBookSVG } from "@/components/graphics/svgs/SVGStash";
 
 type ProfileProps = NativeStackScreenProps<RootStackParameters, 'Calendar'>
 
@@ -46,7 +47,7 @@ const Profile = ({navigation} : ProfileProps) => {
 
             <View style={styles.extrasContainer}>
                 <Pressable style={styles.coursesButton} onPressOut={() => navigation.navigate('Courses')}>
-                    <SVG svgUrl={"https://www.svgrepo.com/show/532906/book-open.svg"} color={'none'} stroke={Scheme.darkPurple} height={50} width={50} fillRule="odd" clipRule="odd"/>
+                    <OpenBookSVG/>
                     <Text style={styles.coursesButtonText}>Courses</Text>
                 </Pressable>
 

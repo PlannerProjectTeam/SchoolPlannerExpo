@@ -52,7 +52,8 @@ export default Calendar
 
 const styles = StyleSheet.create({
     screenContainer: {
-        minHeight: Dimensions.get('screen').height,
+        minHeight: Dimensions.get('window').height,
+        minWidth: Dimensions.get('window').width,
         backgroundColor: 'white'
     },
 });

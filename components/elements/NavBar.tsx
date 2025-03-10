@@ -22,6 +22,7 @@ import { globalStyles, Scheme } from "@/constants/globalStyles";
 import { CalendarBigSVG, CalendarSVG, CheckMarkCircleSVG, PersonSVG, PlusSVG } from "../graphics/svgs/SVGStash";
 import { LinearGradient } from 'expo-linear-gradient';
 import DropShadow from 'react-native-drop-shadow';
+import { Ionicons } from '@expo/vector-icons'
 
 type ScreenNavigationProp<T extends keyof RootStackParameters> = NavigationProp<RootStackParameters, T>;
 type NavBarProps = {
@@ -31,37 +32,42 @@ type NavBarProps = {
 export const NavBar = ({navigation} : NavBarProps) => {
     const [navigationPopup, setNavigationPopup] = useState(false);
 
+
     return (
         <>
-        <LinearGradient colors={['#FFFFFF', '#FFFFFFF5', '#00000000']} start={{ x: 0, y: 1 }} end={{ x: 0, y: 0 }} style={styles.gradientBlur}/>
+        <LinearGradient colors={['#FFFFFF', '#FFFFFFF5', '#FFFFFF00']} start={{ x: 0, y: 1 }} end={{ x: 0, y: 0 }} style={styles.gradientBlur}/>
 
-        {navigationPopup == true? 
+        {navigationPopup == true?
+            <>
+            {/* <LinearGradient colors={['#FFFFFFE0', '#FFFFFFE0', '#FFFFFF00']} start={{ x: 0, y: 1 }} end={{ x: 0, y: 0 }} style={styles.backgroundBlur}/> */}
+
             <View style={styles.navigationPopupContainer}>
                 <Pressable style={styles.navigationPopupButton} onPressOut={() => {navigation.navigate('EditTask'); setNavigationPopup(false)}}>
-                    <CheckMarkCircleSVG/>
+                    <Ionicons name="person" size={24} color={Scheme.darkPurple} />
                     <Text style={styles.navigationPopupText}>Task</Text>
                 </Pressable>
 
                 <Pressable style={styles.navigationPopupButton} onPressOut={() => {navigation.navigate('EditEvent'); setNavigationPopup(false)}}>
-                    <CalendarSVG/>
+                    <Ionicons name="calendar" size={24} color={Scheme.darkPurple} />
                     <Text style={styles.navigationPopupText}>Event</Text>
                 </Pressable>
             </View>
+            </>
         : null}
 
         <View style={styles.navigationBarContainer}>
             <DropShadow style={styles.shadow}>
                 <View style={styles.navigationBar}>
                     <Pressable style={styles.navigationButton} onPressOut={() => navigation.navigate('Calendar')}>
-                        <CalendarBigSVG/>
+                        <Ionicons name="calendar" size={50} color={Scheme.darkPurple} />
                     </Pressable>
 
                     <Pressable style={styles.navigationButton} onPressOut={() => (setNavigationPopup(!navigationPopup))}>
-                        <PlusSVG/>
+                        <Ionicons name="add-circle" size={75} color={Scheme.darkPurple} />
                     </Pressable>
 
                     <Pressable style={styles.navigationButton} onPressOut={() => navigation.navigate('Profile')}>
-                        <PersonSVG/>
+                        <Ionicons name="person" size={50} color={Scheme.darkPurple} />
                     </Pressable>
                 </View>
             </DropShadow>
@@ -72,7 +78,7 @@ export const NavBar = ({navigation} : NavBarProps) => {
 
 const styles = StyleSheet.create({
     screenContainer: {
-        minHeight: Dimensions.get('screen').height,
+        minHeight: Dimensions.get('window').height,
         backgroundColor: 'white'
     },
 
@@ -143,6 +149,15 @@ const styles = StyleSheet.create({
         marginBottom: 50,
         width: '100%',
         height: '30%',
+        bottom: 0,
+    },
+
+    backgroundBlur: {
+        position: 'absolute',
+        alignSelf: 'center',
+        marginBottom: 50,
+        width: '100%',
+        height: '50%',
         bottom: 0,
     }
 });
