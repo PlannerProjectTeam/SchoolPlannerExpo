@@ -12,7 +12,8 @@ import {
     StyleSheet,
     Dimensions,
     SafeAreaView,
-    Pressable
+    Pressable,
+    ScrollView
 } from 'react-native'
 
 // 3rd Party 
@@ -21,17 +22,33 @@ import { RootStackParameters } from "./_layout";
 
 // Custom
 import { globalStyles, Scheme } from "@/constants/globalStyles";
-import { NavBar } from "@/components/ui/NavBar";
+import { NavBar } from "@/components/elements/NavBar";
+import { ListMode } from "@/components/containers/ListMode";
+import { DayMode } from "@/components/containers/DayMode";
+import { WeekMode } from "@/components/containers/WeekMode";
+import { DateSelection } from "@/components/containers/DateSelection";
 
-export type CalendarProps = NativeStackScreenProps<RootStackParameters>;
+export type CalendarProps = NativeStackScreenProps<RootStackParameters, 'Calendar'>;
 
-export const Calendar = ({navigation} : CalendarProps) => {
+const Calendar = ({navigation} : CalendarProps) => {
+    const [isListMode, setListMode] = useState(true);
+    const [isDayMode, setDayMode] = useState(false);
+    const [isWeekMode, setWeekMode] = useState(false);
+
     return (
         <SafeAreaView style={styles.screenContainer}>
+            <ScrollView>
+                <DateSelection/>
+                {isListMode? <ListMode/> : null}
+                {isDayMode? <DayMode/> : null}
+                {isWeekMode? <WeekMode/> : null}
+            </ScrollView>
             <NavBar navigation={navigation}></NavBar>
         </SafeAreaView>
     )
 }
+
+export default Calendar
 
 const styles = StyleSheet.create({
     screenContainer: {

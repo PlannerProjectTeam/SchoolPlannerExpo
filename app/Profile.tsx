@@ -28,11 +28,11 @@ import { RootStackParameters } from "./_layout";
 
 // Custom
 import { globalStyles, Scheme } from "@/constants/globalStyles";
-import { SVG } from "@/components/graphical/SVG";
+import { SVG } from "@/components/graphics/svgs/SVG";
 
 type ProfileProps = NativeStackScreenProps<RootStackParameters, 'Calendar'>
 
-export const Profile = ({navigation} : ProfileProps) => {
+const Profile = ({navigation} : ProfileProps) => {
     const DefaultProfileImage = require('../assets/images/default_profile_picture.png');
 
     const [isEnabled, setIsEnabled] = useState(false);
@@ -77,6 +77,8 @@ export const Profile = ({navigation} : ProfileProps) => {
         </ScrollView>
     )
 }
+
+export default Profile
 
 const styles = StyleSheet.create({
     profileHeader: {

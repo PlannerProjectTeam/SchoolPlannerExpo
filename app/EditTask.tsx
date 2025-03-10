@@ -12,10 +12,12 @@ import {
 } from 'react-native'
 
 
-export const EditTask = () => {
+const EditTask = () => {
     return (
         <View>
             <Text>EditTask</Text>
         </View>
     )
 }
+
+export default EditTask

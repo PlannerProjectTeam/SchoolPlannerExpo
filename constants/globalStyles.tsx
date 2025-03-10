@@ -9,7 +9,7 @@ import { StyleSheet } from "react-native";
 
 export enum Scheme {
     darkPurple = '#4A4458',
-    lightPurple= '#6C637C',
+    lightPurple = '#6C637C',
     darkGrey = '#37313C'
 }
 
@@ -19,8 +19,22 @@ export const globalStyles = StyleSheet.create({
         fontSize: 24,
         color: Scheme.darkPurple
     },
+    subtitleText: {
+        fontFamily: 'Lato',
+        fontSize: 18,
+        color: Scheme.darkGrey
+    },
+    descriptionText: {
+        fontFamily: 'Lato',
+        fontSize: 14,
+        color: Scheme.darkGrey
+    },
+    footerText: {
+        fontFamily: 'Lato',
+        fontSize: 12,
+        color: Scheme.darkGrey
+    },
     sectionHeadingText: {
-        marginLeft: 20,
         fontFamily: 'Lato',
         fontSize: 25,
         color: Scheme.darkGrey

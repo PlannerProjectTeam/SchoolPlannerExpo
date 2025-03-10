@@ -11,10 +11,12 @@ import {
     Text
 } from 'react-native'
 
-export const Courses = () => {
+const Courses = () => {
     return (
         <View>
             <Text>Courses</Text>
         </View>
     )
 }
+
+export default Courses

@@ -5,6 +5,8 @@
  */
 
 import React, { useState } from "react";
+import { NavigationProp } from '@react-navigation/native';
+import { RootStackParameters } from "@/app/_layout";
 
 import {
     View,
@@ -15,51 +17,54 @@ import {
     Pressable
 } from 'react-native'
 
-// 3rd Party 
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParameters } from "@/app/_layout";
-import DropShadow from "@/node_modules/react-native-drop-shadow";
-import { SVG } from "@/components/graphical/SVG";
-
 // Custom
 import { globalStyles, Scheme } from "@/constants/globalStyles";
-import { CalendarProps } from "@/app/Calendar";
+import { CalendarBigSVG, CalendarSVG, CheckMarkCircleSVG, PersonSVG, PlusSVG } from "../graphics/svgs/SVGStash";
+import { LinearGradient } from 'expo-linear-gradient';
+import DropShadow from 'react-native-drop-shadow';
 
-export const NavBar = ({navigation} : CalendarProps) => {
+type ScreenNavigationProp<T extends keyof RootStackParameters> = NavigationProp<RootStackParameters, T>;
+type NavBarProps = {
+    navigation: ScreenNavigationProp<keyof RootStackParameters>;
+};
+
+export const NavBar = ({navigation} : NavBarProps) => {
     const [navigationPopup, setNavigationPopup] = useState(false);
 
     return (
         <>
+        <LinearGradient colors={['#FFFFFF', '#FFFFFFF5', '#00000000']} start={{ x: 0, y: 1 }} end={{ x: 0, y: 0 }} style={styles.gradientBlur}/>
+
         {navigationPopup == true? 
             <View style={styles.navigationPopupContainer}>
                 <Pressable style={styles.navigationPopupButton} onPressOut={() => {navigation.navigate('EditTask'); setNavigationPopup(false)}}>
-                    <SVG svgUrl={"https://www.svgrepo.com/show/437550/checkmark-circle.svg"} color={Scheme.darkPurple} stroke={'none'} height={30} width={30} fillRule="evenodd" clipRule="evenodd"/>
+                    <CheckMarkCircleSVG/>
                     <Text style={styles.navigationPopupText}>Task</Text>
                 </Pressable>
 
                 <Pressable style={styles.navigationPopupButton} onPressOut={() => {navigation.navigate('EditEvent'); setNavigationPopup(false)}}>
-                    <SVG svgUrl={"https://www.svgrepo.com/show/521530/calendar.svg"} color={Scheme.darkPurple} stroke={'none'} height={30} width={30} fillRule="evenodd" clipRule="evenodd"/>
+                    <CalendarSVG/>
                     <Text style={styles.navigationPopupText}>Event</Text>
                 </Pressable>
             </View>
         : null}
 
         <View style={styles.navigationBarContainer}>
-            {/* <DropShadow style={styles.shadow}> NOT WORKING ATM */}
+            <DropShadow style={styles.shadow}>
                 <View style={styles.navigationBar}>
                     <Pressable style={styles.navigationButton} onPressOut={() => navigation.navigate('Calendar')}>
-                        <SVG svgUrl={"https://www.svgrepo.com/show/521532/calendar-big.svg"} color={Scheme.darkPurple} stroke={'none'} height={45} width={45} fillRule="evenodd" clipRule="evenodd"/>
+                        <CalendarBigSVG/>
                     </Pressable>
 
                     <Pressable style={styles.navigationButton} onPressOut={() => (setNavigationPopup(!navigationPopup))}>
-                        <SVG svgUrl={"https://www.svgrepo.com/show/440141/plus-circle-fill.svg"} color={Scheme.darkPurple} stroke={'none'} height={70} width={70} fillRule="evenodd" clipRule="evenodd"/>
+                        <PlusSVG/>
                     </Pressable>
 
                     <Pressable style={styles.navigationButton} onPressOut={() => navigation.navigate('Profile')}>
-                        <SVG svgUrl={"https://www.svgrepo.com/show/440005/person.svg"} color={Scheme.darkPurple} stroke={'none'} height={50} width={50} fillRule="evenodd" clipRule="evenodd"/>
+                        <PersonSVG/>
                     </Pressable>
                 </View>
-            {/* </DropShadow> */}
+            </DropShadow>
         </View>
         </>
     )
@@ -76,8 +81,8 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         marginBottom: 50,
         width: '60%',
-        height: '12%',
-        bottom: 100,
+        maxHeight: '8%',
+        bottom: 125,
     },
     navigationBar: {
         borderRadius: 30,
@@ -88,26 +93,26 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '80%',
         backgroundColor: 'white',
-        borderWidth: 2,
+        borderWidth: 0,
         borderColor: Scheme.darkPurple
     },
     navigationPopupContainer: {
         position: 'absolute',
         paddingTop: 5,
-        borderTopLeftRadius: 30,
-        borderTopRightRadius: 30,
+        borderTopLeftRadius: 25,
+        borderTopRightRadius: 25,
         alignSelf: 'center',
         alignItems: 'center',
         bottom: 210,
         width: '40%',
-        height: '25%',
+        height: '22%',
         backgroundColor: Scheme.darkPurple
     },
     navigationButton: {
         paddingHorizontal: 5
     },
     navigationPopupButton: {
-        marginTop: 20,
+        marginTop: 12,
         borderRadius: 15,
         flexDirection: 'row',
         alignItems: 'center',
@@ -130,5 +135,14 @@ const styles = StyleSheet.create({
             width: 1,
             height: 1
         },
+    },
+
+    gradientBlur: {
+        position: 'absolute',
+        alignSelf: 'center',
+        marginBottom: 50,
+        width: '100%',
+        height: '30%',
+        bottom: 0,
     }
 });

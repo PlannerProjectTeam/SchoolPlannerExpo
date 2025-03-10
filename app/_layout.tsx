@@ -10,11 +10,11 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { Calendar } from './Calendar';
-import { Profile } from './Profile';
-import { EditTask } from './EditTask';
-import { EditEvent } from './EditEvent';
-import { Courses } from './Courses';
+import Calendar from './Calendar';
+import Profile from './Profile';
+import EditTask from './EditTask';
+import EditEvent from './EditEvent';
+import Courses from './Courses';
 
 export type RootStackParameters = {
   Calendar : undefined,

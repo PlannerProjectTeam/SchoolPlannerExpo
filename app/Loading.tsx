@@ -12,10 +12,12 @@ import {
 } from 'react-native'
 
 
-export const Loading = () => {
+const Loading = () => {
     return (
         <View>
             <Text>Loading</Text>
         </View>
     )
 }
+
+export default Loading

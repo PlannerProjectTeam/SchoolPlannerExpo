@@ -12,10 +12,12 @@ import {
 } from 'react-native'
 
 
-export const EditCourse = () => {
+const EditCourse = () => {
     return (
         <View>
             <Text>EditCourse</Text>
         </View>
     )
 }
+
+export default EditCourse
