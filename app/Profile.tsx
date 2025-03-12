@@ -25,11 +25,10 @@ import {
 // 3rd Party 
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParameters } from "./_layout";
+import { Ionicons, Entypo } from "@expo/vector-icons";
 
 // Custom
 import { globalStyles, Scheme } from "@/constants/globalStyles";
-import { SVG } from "@/components/graphics/svgs/SVG";
-import { OpenBookSVG } from "@/components/graphics/svgs/SVGStash";
 
 type ProfileProps = NativeStackScreenProps<RootStackParameters, 'Calendar'>
 
@@ -47,7 +46,7 @@ const Profile = ({navigation} : ProfileProps) => {
 
             <View style={styles.extrasContainer}>
                 <Pressable style={styles.coursesButton} onPressOut={() => navigation.navigate('Courses')}>
-                    <OpenBookSVG/>
+                    <Entypo name="book" size={24} color={Scheme.darkPurple} />
                     <Text style={styles.coursesButtonText}>Courses</Text>
                 </Pressable>
 
@@ -57,7 +56,7 @@ const Profile = ({navigation} : ProfileProps) => {
                 </View>
             </View>
 
-            <Text style={globalStyles.sectionHeadingText}>Settings</Text>
+            <Text style={[globalStyles.sectionHeadingText, styles.leftMargin]}>Settings</Text>
             <View style={styles.settingsContainer}>
 
                 <View style={styles.switchContainer}>
@@ -153,5 +152,9 @@ const styles = StyleSheet.create({
         fontSize: 25,
         fontWeight: '300',
         textAlign: 'right'
+    },
+
+    leftMargin: {
+        marginHorizontal: 10,
     }
 })

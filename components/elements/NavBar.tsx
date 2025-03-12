@@ -4,9 +4,10 @@
  * @version 0.1.0 02/01/25
  */
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { NavigationProp } from '@react-navigation/native';
 import { RootStackParameters } from "@/app/_layout";
+import { StyleProp, ViewStyle, LayoutRectangle } from "react-native";
 
 import {
     View,
@@ -19,7 +20,6 @@ import {
 
 // Custom
 import { globalStyles, Scheme } from "@/constants/globalStyles";
-import { CalendarBigSVG, CalendarSVG, CheckMarkCircleSVG, PersonSVG, PlusSVG } from "../graphics/svgs/SVGStash";
 import { LinearGradient } from 'expo-linear-gradient';
 import DropShadow from 'react-native-drop-shadow';
 import { Ionicons } from '@expo/vector-icons'
@@ -30,18 +30,37 @@ type NavBarProps = {
 };
 
 export const NavBar = ({navigation} : NavBarProps) => {
-    const [navigationPopup, setNavigationPopup] = useState(false);
+    const [navBarLayout, setNavBarLayout] = useState<LayoutRectangle | null>(null)
+    const [navPopupSeen, setNavigationPopup] = useState(false);
+    
+    const getNavBarPopupContainerStyle = () => {
+        if (navBarLayout == null){
+            return { /* No properties */}
+        }
 
+        return {
+            position: 'absolute',
+            top: navBarLayout.y - navBarLayout.height * 1.6,
+            alignSelf: 'center',
+            width: navBarLayout.width * 0.6,
+            height: navBarLayout.height * 1.6,
+            paddingTop: 5,
+            borderTopLeftRadius: 25,
+            borderTopRightRadius: 25,
+            alignItems: 'center',
+            backgroundColor: Scheme.darkPurple
+        } as StyleProp<ViewStyle>
+    }
 
     return (
         <>
         <LinearGradient colors={['#FFFFFF', '#FFFFFFF5', '#FFFFFF00']} start={{ x: 0, y: 1 }} end={{ x: 0, y: 0 }} style={styles.gradientBlur}/>
 
-        {navigationPopup == true?
+        {navPopupSeen == true?
             <>
             {/* <LinearGradient colors={['#FFFFFFE0', '#FFFFFFE0', '#FFFFFF00']} start={{ x: 0, y: 1 }} end={{ x: 0, y: 0 }} style={styles.backgroundBlur}/> */}
 
-            <View style={styles.navigationPopupContainer}>
+            <View style={getNavBarPopupContainerStyle()}>
                 <Pressable style={styles.navigationPopupButton} onPressOut={() => {navigation.navigate('EditTask'); setNavigationPopup(false)}}>
                     <Ionicons name="person" size={24} color={Scheme.darkPurple} />
                     <Text style={styles.navigationPopupText}>Task</Text>
@@ -55,14 +74,14 @@ export const NavBar = ({navigation} : NavBarProps) => {
             </>
         : null}
 
-        <View style={styles.navigationBarContainer}>
-            <DropShadow style={styles.shadow}>
-                <View style={styles.navigationBar}>
+        {/* <View style={styles.navigationBarContainer} onLayout={(event : any) => (setNavBarLayout(event.nativeEvent.layout))}> */}
+            {/* <DropShadow style={styles.shadow}> */}
+                <View style={styles.navigationBar} onLayout={(event : any) => (setNavBarLayout(event.nativeEvent.layout))}>
                     <Pressable style={styles.navigationButton} onPressOut={() => navigation.navigate('Calendar')}>
                         <Ionicons name="calendar" size={50} color={Scheme.darkPurple} />
                     </Pressable>
 
-                    <Pressable style={styles.navigationButton} onPressOut={() => (setNavigationPopup(!navigationPopup))}>
+                    <Pressable style={styles.navigationButton} onPressOut={() => (setNavigationPopup(!navPopupSeen))}>
                         <Ionicons name="add-circle" size={75} color={Scheme.darkPurple} />
                     </Pressable>
 
@@ -70,8 +89,8 @@ export const NavBar = ({navigation} : NavBarProps) => {
                         <Ionicons name="person" size={50} color={Scheme.darkPurple} />
                     </Pressable>
                 </View>
-            </DropShadow>
-        </View>
+            {/* </DropShadow> */}
+        {/* </View> */}
         </>
     )
 }
@@ -86,33 +105,32 @@ const styles = StyleSheet.create({
         position: 'absolute',
         alignSelf: 'center',
         marginBottom: 50,
-        width: '60%',
-        maxHeight: '8%',
+        width: 250,
+        maxHeight: 80,
         bottom: 125,
     },
     navigationBar: {
+        position: 'absolute',
+        alignSelf: 'center',
+        marginBottom: 50,
+        width: 250,
+        maxHeight: 90,
+        bottom: 125,
         borderRadius: 30,
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: 50,
-        width: '100%',
         height: '80%',
         backgroundColor: 'white',
-        borderWidth: 0,
-        borderColor: Scheme.darkPurple
-    },
-    navigationPopupContainer: {
-        position: 'absolute',
-        paddingTop: 5,
-        borderTopLeftRadius: 25,
-        borderTopRightRadius: 25,
-        alignSelf: 'center',
-        alignItems: 'center',
-        bottom: 210,
-        width: '40%',
-        height: '22%',
-        backgroundColor: Scheme.darkPurple
+        borderColor: Scheme.darkPurple,
+
+        // Android
+        elevation: 5,
+        // IOS
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.25,
+        shadowRadius: 3,
     },
     navigationButton: {
         paddingHorizontal: 5
@@ -127,6 +145,7 @@ const styles = StyleSheet.create({
         height: 50,
         backgroundColor: 'white'
     },
+    
     navigationPopupText: {
         color: Scheme.darkGrey,
         fontSize: 20,

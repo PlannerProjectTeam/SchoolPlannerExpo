@@ -37,7 +37,7 @@ const Calendar = ({navigation} : CalendarProps) => {
 
     return (
         <SafeAreaView style={styles.screenContainer}>
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
                 <DateSelection/>
                 {isListMode? <ListMode/> : null}
                 {isDayMode? <DayMode/> : null}

@@ -9,19 +9,19 @@ export const ListMode = () => {
     return (
         <>
         <View style={[styles.container]}>
-            <Text style={[globalStyles.sectionHeadingText, styles.sectionHeading]}> Tasks </Text>
+            <Text style={[globalStyles.sectionHeadingText, styles.verticalMargin]}> Tasks </Text>
             {[...ItemCardFakeData].map(({id, color, title, subtitle, footer, type}) => (
                 type == ItemCardTypes.Task? 
                     <ItemCard key={id} color={color} title={title} subtitle={subtitle} footer={footer}/> 
                 : null ))}
 
-            <Text style={[globalStyles.sectionHeadingText, styles.sectionHeading]}> Events </Text>
+            <Text style={[globalStyles.sectionHeadingText, styles.verticalMargin]}> Events </Text>
             {[...ItemCardFakeData].map(({id, color, title, subtitle, footer, type}) => (
                 type == ItemCardTypes.Event? 
                     <ItemCard key={id} color={color} title={title} subtitle={subtitle} footer={footer}/> 
                 : null ))}
 
-            <Text style={[globalStyles.sectionHeadingText, styles.sectionHeading]}> Courses </Text>
+            <Text style={[globalStyles.sectionHeadingText, styles.verticalMargin]}> Courses </Text>
             {[...ItemCardFakeData].map(({id, color, title, subtitle, footer, type}) => (
                 type == ItemCardTypes.Course? 
                     <ItemCard key={id} color={color} title={title} subtitle={subtitle} footer={footer}/> 
@@ -35,10 +35,10 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'column',
         justifyContent: 'flex-start',
-        marginLeft: 15,
+        marginHorizontal: 15,
         marginBottom: Dimensions.get('screen').height * 0.3,
     },
-    sectionHeading: {
+    verticalMargin: {
         marginVertical: 10,
     },
     cardOptions: {

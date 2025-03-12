@@ -1,8 +1,7 @@
 import React, { PropsWithChildren } from "react"
 import { View, Text, StyleSheet, Pressable, Dimensions } from "react-native"
 import { globalStyles } from "@/constants/globalStyles"
-import { DotSVG } from "../graphics/svgs/SVGStash"
-import { Ionicons, Octicons } from "@expo/vector-icons"
+import { Octicons } from "@expo/vector-icons"
 import { Scheme } from "@/constants/globalStyles"
 
 type ItemCardProps = PropsWithChildren<{
@@ -33,7 +32,7 @@ export const ItemCard =  ({color, title, subtitle, footer} : ItemCardProps) => {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        width: Dimensions.get('window').width * 0.9,
+        width: Dimensions.get('window').width * .92,
         height: 100,
         justifyContent: 'flex-start',
         alignContent: 'center',
