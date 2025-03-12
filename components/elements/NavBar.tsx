@@ -57,9 +57,6 @@ export const NavBar = ({navigation} : NavBarProps) => {
         <LinearGradient colors={['#FFFFFF', '#FFFFFFF5', '#FFFFFF00']} start={{ x: 0, y: 1 }} end={{ x: 0, y: 0 }} style={styles.gradientBlur}/>
 
         {navPopupSeen == true?
-            <>
-            {/* <LinearGradient colors={['#FFFFFFE0', '#FFFFFFE0', '#FFFFFF00']} start={{ x: 0, y: 1 }} end={{ x: 0, y: 0 }} style={styles.backgroundBlur}/> */}
-
             <View style={getNavBarPopupContainerStyle()}>
                 <Pressable style={styles.navigationPopupButton} onPressOut={() => {navigation.navigate('EditTask'); setNavigationPopup(false)}}>
                     <Ionicons name="person" size={24} color={Scheme.darkPurple} />
@@ -71,26 +68,21 @@ export const NavBar = ({navigation} : NavBarProps) => {
                     <Text style={styles.navigationPopupText}>Event</Text>
                 </Pressable>
             </View>
-            </>
         : null}
 
-        {/* <View style={styles.navigationBarContainer} onLayout={(event : any) => (setNavBarLayout(event.nativeEvent.layout))}> */}
-            {/* <DropShadow style={styles.shadow}> */}
-                <View style={styles.navigationBar} onLayout={(event : any) => (setNavBarLayout(event.nativeEvent.layout))}>
-                    <Pressable style={styles.navigationButton} onPressOut={() => navigation.navigate('Calendar')}>
-                        <Ionicons name="calendar" size={50} color={Scheme.darkPurple} />
-                    </Pressable>
+        <View style={styles.navigationBar} onLayout={(event : any) => (setNavBarLayout(event.nativeEvent.layout))}>
+            <Pressable style={styles.navigationButton} onPressOut={() => navigation.navigate('Calendar')}>
+                <Ionicons name="calendar" size={50} color={Scheme.darkPurple} />
+            </Pressable>
 
-                    <Pressable style={styles.navigationButton} onPressOut={() => (setNavigationPopup(!navPopupSeen))}>
-                        <Ionicons name="add-circle" size={75} color={Scheme.darkPurple} />
-                    </Pressable>
+            <Pressable style={styles.navigationButton} onPressOut={() => (setNavigationPopup(!navPopupSeen))}>
+                <Ionicons name="add-circle" size={75} color={Scheme.darkPurple} />
+            </Pressable>
 
-                    <Pressable style={styles.navigationButton} onPressOut={() => navigation.navigate('Profile')}>
-                        <Ionicons name="person" size={50} color={Scheme.darkPurple} />
-                    </Pressable>
-                </View>
-            {/* </DropShadow> */}
-        {/* </View> */}
+            <Pressable style={styles.navigationButton} onPressOut={() => navigation.navigate('Profile')}>
+                <Ionicons name="person" size={50} color={Scheme.darkPurple} />
+            </Pressable>
+        </View>
         </>
     )
 }
@@ -115,7 +107,7 @@ const styles = StyleSheet.create({
         marginBottom: 50,
         width: 250,
         maxHeight: 90,
-        bottom: 125,
+        bottom: 10,
         borderRadius: 30,
         flexDirection: 'row',
         justifyContent: 'center',
@@ -165,7 +157,7 @@ const styles = StyleSheet.create({
     gradientBlur: {
         position: 'absolute',
         alignSelf: 'center',
-        marginBottom: 50,
+        marginBottom: 0,
         width: '100%',
         height: '30%',
         bottom: 0,
