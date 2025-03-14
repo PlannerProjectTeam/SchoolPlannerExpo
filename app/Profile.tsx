@@ -29,6 +29,7 @@ import { Ionicons, Entypo } from "@expo/vector-icons";
 
 // Custom
 import { globalStyles, Scheme } from "@/constants/globalStyles";
+import { NavBar } from "@/components/elements/NavBar";
 
 type ProfileProps = NativeStackScreenProps<RootStackParameters, 'Calendar'>
 
@@ -39,6 +40,7 @@ const Profile = ({navigation} : ProfileProps) => {
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
     return (
+        <>
         <ScrollView>
             <View style={styles.profileHeader}>
                 <Image source={DefaultProfileImage} style={styles.profileImage}></Image>
@@ -75,6 +77,9 @@ const Profile = ({navigation} : ProfileProps) => {
                 </View>
             </View>
         </ScrollView>
+
+        <NavBar navigation={navigation}/>
+        </>
     )
 }
 
