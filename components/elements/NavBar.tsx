@@ -101,21 +101,13 @@ const styles = StyleSheet.create({
         backgroundColor: 'white'
     },
 
-    navigationBarContainer: {
-        position: 'absolute',
-        alignSelf: 'center',
-        marginBottom: 50,
-        width: 250,
-        maxHeight: 80,
-        bottom: 125,
-    },
     navigationBar: {
         position: 'absolute',
         alignSelf: 'center',
         marginBottom: 50,
         width: 250,
         maxHeight: 90,
-        bottom: 125,
+        bottom: 100,
         borderRadius: 30,
         flexDirection: 'row',
         justifyContent: 'center',
