@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'flex-start',
         marginHorizontal: 15,
-        marginBottom: Dimensions.get('screen').height * 0.3,
+        marginBottom: Dimensions.get('screen').height * 0.1,
     },
     verticalMargin: {
         marginVertical: 10,

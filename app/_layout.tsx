@@ -8,7 +8,8 @@
 import React from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createNativeStackNavigator, } from '@react-navigation/native-stack';
+import { StyleSheet } from 'react-native';
 
 import Calendar from './Calendar';
 import Profile from './Profile';
@@ -27,13 +28,17 @@ export type RootStackParameters = {
 const Stack = createNativeStackNavigator<RootStackParameters>();
 
 export default function RootLayout() {
-  return (
-      <Stack.Navigator initialRouteName='Calendar'>
-        <Stack.Screen name="Calendar" component={Calendar}/>
-        <Stack.Screen name="EditEvent" component={EditEvent}/>
-        <Stack.Screen name="EditTask" component={EditTask}/>
-        <Stack.Screen name="Profile" component={Profile}/>
-        <Stack.Screen name="Courses" component={Courses}/>
-      </Stack.Navigator>
-  );
+    return (
+        <Stack.Navigator initialRouteName='Calendar'>
+          <Stack.Screen name="Calendar" component={Calendar} options={options}/>
+          <Stack.Screen name="EditEvent" component={EditEvent} options={options}/>
+          <Stack.Screen name="EditTask" component={EditTask} options={options}/>
+          <Stack.Screen name="Profile" component={Profile} options={options}/>
+          <Stack.Screen name="Courses" component={Courses} options={options}/>
+        </Stack.Navigator>
+    );
+}
+
+const options = {
+    headerShown: false
 }

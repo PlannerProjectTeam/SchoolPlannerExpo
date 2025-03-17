@@ -24,26 +24,56 @@ import {
 
 // 3rd Party 
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParameters } from "./_layout";
-import { Ionicons, Entypo } from "@expo/vector-icons";
+import { Entypo, Feather } from "@expo/vector-icons";
+import { LayoutRectangle, StyleProp, ViewStyle } from "react-native";
 
 // Custom
 import { globalStyles, Scheme } from "@/constants/globalStyles";
 import { NavBar } from "@/components/elements/NavBar";
+import { RootStackParameters } from "./_layout";
+import { ThemeSelector } from "@/components/elements/ThemeSelector";
+import { SettingsSwitches } from "@/components/elements/SettingsSwitches";
 
 type ProfileProps = NativeStackScreenProps<RootStackParameters, 'Calendar'>
 
 const Profile = ({navigation} : ProfileProps) => {
+    // For profile picture:
     const DefaultProfileImage = require('../assets/images/default_profile_picture.png');
 
-    const [isEnabled, setIsEnabled] = useState(false);
-    const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+    const [profileImageLayout, setProfileImageLayout] = useState<LayoutRectangle | null>(null)
+    
+    const getProfileImageChangeButtonStyle = () => {
+        if (profileImageLayout == null){
+            return { /* No properties */}
+        }
+
+        return {
+            position: 'absolute',
+            top: profileImageLayout.y + profileImageLayout.height,
+            left: profileImageLayout.x + profileImageLayout.width * 0.75,
+            alignSelf: 'center',
+            width: 34,
+            height: 34,
+            borderRadius: 17,
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: Scheme.darkPurple
+        } as StyleProp<ViewStyle>
+    }
 
     return (
         <>
         <ScrollView>
             <View style={styles.profileHeader}>
-                <Image source={DefaultProfileImage} style={styles.profileImage}></Image>
+                <Text style={[globalStyles.subtitleText, styles.profileHeaderText]}>My Profile</Text>
+                
+                <View onLayout={(event : any) => (setProfileImageLayout(event.nativeEvent.layout))}>
+                    <Image source={DefaultProfileImage} style={styles.profileImage}/>
+                </View>
+
+                <View style={getProfileImageChangeButtonStyle()}>
+                    <Feather name="edit-3" size={20} color="white" />
+                </View>
             </View>
 
             <View style={styles.extrasContainer}>
@@ -58,23 +88,9 @@ const Profile = ({navigation} : ProfileProps) => {
                 </View>
             </View>
 
-            <Text style={[globalStyles.sectionHeadingText, styles.leftMargin]}>Settings</Text>
             <View style={styles.settingsContainer}>
-
-                <View style={styles.switchContainer}>
-                    <Switch style={styles.switch} trackColor={{false: '#767577', true: Scheme.darkPurple}} thumbColor={isEnabled ? 'white' : '#f4f3f4'} ios_backgroundColor="#3e3e3e" onValueChange={toggleSwitch} value={isEnabled}></Switch>
-                    <Text style={styles.switchText}>24-HOUR CLOCK</Text>
-                </View>
-                
-                <View style={styles.switchContainer}>
-                    <Switch style={styles.switch} trackColor={{false: '#767577', true: Scheme.darkPurple}} thumbColor={isEnabled ? 'white' : '#f4f3f4'} ios_backgroundColor="#3e3e3e" onValueChange={toggleSwitch} value={isEnabled}></Switch>
-                    <Text style={styles.switchText}>DARK MODE</Text>
-                </View>
-                
-                <View style={styles.switchContainer}>
-                <Switch style={styles.switch} trackColor={{false: '#767577', true: Scheme.darkPurple}} thumbColor={isEnabled ? 'white' : '#f4f3f4'} ios_backgroundColor="#3e3e3e" onValueChange={toggleSwitch} value={isEnabled}></Switch>
-                <Text style={styles.switchText}>WEEK STARTS ON SUNDAY</Text>
-                </View>
+                <SettingsSwitches/>
+                <ThemeSelector/>
             </View>
         </ScrollView>
 
@@ -88,7 +104,7 @@ export default Profile
 const styles = StyleSheet.create({
     profileHeader: {
         backgroundColor: Scheme.lightPurple,
-        height: 150,
+        height: 175,
         justifyContent: 'flex-end',
         alignItems: 'center'
     },
@@ -96,6 +112,11 @@ const styles = StyleSheet.create({
         width: 150,
         height: 150,
         marginBottom: -50
+    },
+    profileHeaderText: {
+        flex: 1,
+        color: 'white',
+        textAlignVertical: 'center'
     },
 
     coursesButton: {
@@ -107,7 +128,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         marginLeft: 10,
         textAlignVertical: 'center',
-        
     },
 
     extrasContainer: {
@@ -119,31 +139,10 @@ const styles = StyleSheet.create({
     },
 
     settingsContainer: {
+        marginHorizontal: 20,
         justifyContent: 'flex-start',
         flexDirection: 'column',
         alignItems: 'flex-start',
-        paddingTop: 10,
-        paddingLeft: 50,
-    },
-
-    switchContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        textAlignVertical: 'center'
-    },
-    switch: {
-        transform: [{ scaleX: 1 }, { scaleY: 1 }],
-        marginTop: 20,
-        verticalAlign: 'middle'
-    },
-    switchText: {
-        marginLeft: 25,
-        color: Scheme.darkPurple,
-        fontSize: 20,
-        fontWeight: '200',
-        textAlignVertical: 'center',
-        marginTop: 20
     },
 
     IDHeaderText: {

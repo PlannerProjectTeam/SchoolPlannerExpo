@@ -18,7 +18,6 @@ import {
 
 // 3rd Party 
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParameters } from "./_layout";
 import { Switch } from "react-native";
 
 // Custom
@@ -28,6 +27,8 @@ import { ListMode } from "@/components/containers/ListMode";
 import { DayMode } from "@/components/containers/DayMode";
 import { WeekMode } from "@/components/containers/WeekMode";
 import { DateSelection } from "@/components/containers/DateSelection";
+import { RootStackParameters } from "./_layout";
+
 
 export type CalendarProps = NativeStackScreenProps<RootStackParameters, 'Calendar'>;
 
@@ -49,16 +50,17 @@ const Calendar = ({navigation} : CalendarProps) => {
 
     return (
         <>
-            <ScrollView style={styles.screenContainer} showsVerticalScrollIndicator={false}>
-                <View style={styles.listModeSwitchContainer}>
-                    <Switch style={styles.listModeSwitch} trackColor={{false: '#767577', true: Scheme.darkPurple}} thumbColor={isListMode ? 'white' : '#f4f3f4'} ios_backgroundColor="#3e3e3e" onValueChange={() => (setListMode(!isListMode))} value={isListMode}></Switch>
-                </View>
-                <DateSelection/>
-                {isListMode? <ListMode/> : null}
-                {isDayMode? <DayMode/> : null}
-                {isWeekMode? <WeekMode/> : null}
-            </ScrollView>
-            <NavBar navigation={navigation}></NavBar>
+        <ScrollView style={styles.screenContainer} showsVerticalScrollIndicator={false}>
+            <DateSelection/>
+            <View style={styles.listModeSwitchContainer}>
+                <Text style={[styles.listModeSwitchText, globalStyles.switchText]}>LIST MODE</Text>
+                <Switch style={styles.listModeSwitch} trackColor={{false: '#767577', true: Scheme.darkPurple}} thumbColor={isListMode ? 'white' : '#f4f3f4'} ios_backgroundColor="#3e3e3e" onValueChange={() => (setListMode(!isListMode))} value={isListMode}></Switch>
+            </View>
+            {isListMode? <ListMode/> : null}
+            {isDayMode? <DayMode/> : null}
+            {isWeekMode? <WeekMode/> : null}
+        </ScrollView>
+        <NavBar navigation={navigation}></NavBar>
         </>
     )
 }
@@ -67,15 +69,21 @@ export default Calendar
 
 const styles = StyleSheet.create({
     screenContainer: {
-        minHeight: Dimensions.get('window').height,
-        minWidth: Dimensions.get('window').width,
         backgroundColor: 'white'
     },
-    listModeSwitch: {
 
-    },
     listModeSwitchContainer: {
+        marginHorizontal: 25,
+        marginVertical: 0,
+        alignItems: 'center',
+        flexDirection: 'row',
         alignSelf: 'flex-end',
         margin: 10,
+    },
+    listModeSwitch: {
+        transform: [{ scaleX: 1.5 }, { scaleY: 1.5 }],
+    },
+    listModeSwitchText: {
+        marginHorizontal: 15,
     }
 });

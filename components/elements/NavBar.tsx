@@ -14,14 +14,12 @@ import {
     Text,
     StyleSheet,
     Dimensions,
-    SafeAreaView,
     Pressable
 } from 'react-native'
 
 // Custom
 import { globalStyles, Scheme } from "@/constants/globalStyles";
 import { LinearGradient } from 'expo-linear-gradient';
-import DropShadow from 'react-native-drop-shadow';
 import { Ionicons } from '@expo/vector-icons'
 
 type ScreenNavigationProp<T extends keyof RootStackParameters> = NavigationProp<RootStackParameters, T>;
@@ -40,10 +38,10 @@ export const NavBar = ({navigation} : NavBarProps) => {
 
         return {
             position: 'absolute',
-            top: navBarLayout.y - navBarLayout.height * 1.6,
+            top: navBarLayout.y - navBarLayout.height * 1.8,
             alignSelf: 'center',
             width: navBarLayout.width * 0.6,
-            height: navBarLayout.height * 1.6,
+            height: navBarLayout.height * 1.8,
             paddingTop: 5,
             borderTopLeftRadius: 25,
             borderTopRightRadius: 25,
@@ -72,15 +70,15 @@ export const NavBar = ({navigation} : NavBarProps) => {
 
         <View style={styles.navigationBar} onLayout={(event : any) => (setNavBarLayout(event.nativeEvent.layout))}>
             <Pressable style={styles.navigationButton} onPressOut={() => navigation.navigate('Calendar')}>
-                <Ionicons name="calendar" size={50} color={Scheme.darkPurple} />
+                <Ionicons name="calendar" size={45} color={Scheme.darkPurple} />
             </Pressable>
 
             <Pressable style={styles.navigationButton} onPressOut={() => (setNavigationPopup(!navPopupSeen))}>
-                <Ionicons name="add-circle" size={75} color={Scheme.darkPurple} />
+                <Ionicons name="add-circle" size={70} color={Scheme.darkPurple} />
             </Pressable>
 
             <Pressable style={styles.navigationButton} onPressOut={() => navigation.navigate('Profile')}>
-                <Ionicons name="person" size={50} color={Scheme.darkPurple} />
+                <Ionicons name="person" size={45} color={Scheme.darkPurple} />
             </Pressable>
         </View>
         </>
@@ -96,10 +94,9 @@ const styles = StyleSheet.create({
     navigationBar: {
         position: 'absolute',
         alignSelf: 'center',
-        marginBottom: 50,
-        width: 250,
-        maxHeight: 90,
-        bottom: 10,
+        width: 225,
+        maxHeight: 80,
+        bottom: 25,
         borderRadius: 30,
         flexDirection: 'row',
         justifyContent: 'center',
@@ -125,7 +122,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        width: 120,
+        width: 110,
         height: 50,
         backgroundColor: 'white'
     },
@@ -151,7 +148,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         marginBottom: 0,
         width: '100%',
-        height: '30%',
+        height: '20%',
         bottom: 0,
     },
 
