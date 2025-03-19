@@ -28,6 +28,7 @@ import { DayMode } from "@/components/containers/DayMode";
 import { WeekMode } from "@/components/containers/WeekMode";
 import { DateSelection } from "@/components/containers/DateSelection";
 import { RootStackParameters } from "./_layout";
+import { setCurrentTheme } from "@/classes/Themes";
 
 
 export type CalendarProps = NativeStackScreenProps<RootStackParameters, 'Calendar'>;
@@ -54,7 +55,7 @@ const Calendar = ({navigation} : CalendarProps) => {
             <DateSelection/>
             <View style={styles.listModeSwitchContainer}>
                 <Text style={[styles.listModeSwitchText, globalStyles.switchText]}>LIST MODE</Text>
-                <Switch style={styles.listModeSwitch} trackColor={{false: '#767577', true: Scheme.darkPurple}} thumbColor={isListMode ? 'white' : '#f4f3f4'} ios_backgroundColor="#3e3e3e" onValueChange={() => (setListMode(!isListMode))} value={isListMode}></Switch>
+                <Switch style={styles.listModeSwitch} trackColor={{false: '#767577', true: Scheme.darkPurple}} thumbColor={isListMode ? 'white' : '#f4f3f4'} ios_backgroundColor="#3e3e3e" onValueChange={() => {setListMode(!isListMode)}} value={isListMode}></Switch>
             </View>
             {isListMode? <ListMode/> : null}
             {isDayMode? <DayMode/> : null}
@@ -81,7 +82,7 @@ const styles = StyleSheet.create({
         margin: 10,
     },
     listModeSwitch: {
-        transform: [{ scaleX: 1.5 }, { scaleY: 1.5 }],
+        transform: [{ scaleX: 1 }, { scaleY: 1 }],
     },
     listModeSwitchText: {
         marginHorizontal: 15,

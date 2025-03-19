@@ -4,6 +4,7 @@ import { useState } from "react"
 import { globalStyles } from "@/constants/globalStyles"
 import { Octicons } from "@expo/vector-icons"
 import { Scheme } from "@/constants/globalStyles"
+import Toggle from "react-native-toggle-element"
 
 
 export const SettingsSwitches =  () => {
@@ -13,6 +14,9 @@ export const SettingsSwitches =  () => {
         
     return (
         <>
+        {/* Unusable right now, issue with button appearing behind track (waiting for fix)
+        <Toggle onPress={() => (setTwentyFourHourEnabled(!twentyFourHourEnabled))} value={twentyFourHourEnabled} thumbButton={{ activeBackgroundColor: 'white', inActiveBackgroundColor: 'white', width: 25, height: 25, radius: 25, borderWidth: 1 }} trackBar={{ activeBackgroundColor: Scheme.darkPurple, inActiveBackgroundColor: 'grey', width: 40, height: 20, radius: 25 }} ></Toggle> */}
+       
         <Text style={[globalStyles.sectionHeadingText]}>Settings</Text>
 
         <View style={styles.switchContainer}>
@@ -39,10 +43,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-start',
         marginTop: 10,
-
     },
     switch: {
         transform: [{ scaleX: 1 }, { scaleY: 1 }],
+    },
+    newSwitch: {
+
     },
     switchText: {
         marginLeft: 10,

@@ -6,8 +6,9 @@ import { ItemCardFakeData } from "@/testing/fake-data/itemcards"
 import { ItemCardTypes } from "@/classes/ItemCardData"
 
 export const ListMode = () => {
+
     return (
-        <>
+        <>        
         <View style={[styles.container]}>
             <Text style={[globalStyles.sectionHeadingText, styles.verticalMargin]}> Tasks </Text>
             {[...ItemCardFakeData].map(({id, color, title, subtitle, footer, type}) => (

@@ -21,6 +21,7 @@ import {
 import { globalStyles, Scheme } from "@/constants/globalStyles";
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons'
+import { getCurrentTheme } from "@/classes/Themes";
 
 type ScreenNavigationProp<T extends keyof RootStackParameters> = NavigationProp<RootStackParameters, T>;
 type NavBarProps = {
@@ -70,15 +71,15 @@ export const NavBar = ({navigation} : NavBarProps) => {
 
         <View style={styles.navigationBar} onLayout={(event : any) => (setNavBarLayout(event.nativeEvent.layout))}>
             <Pressable style={styles.navigationButton} onPressOut={() => navigation.navigate('Calendar')}>
-                <Ionicons name="calendar" size={45} color={Scheme.darkPurple} />
+                <Ionicons name="calendar" size={45} color={getCurrentTheme()} />
             </Pressable>
 
             <Pressable style={styles.navigationButton} onPressOut={() => (setNavigationPopup(!navPopupSeen))}>
-                <Ionicons name="add-circle" size={70} color={Scheme.darkPurple} />
+                <Ionicons name="add-circle" size={70} color={getCurrentTheme()} />
             </Pressable>
 
             <Pressable style={styles.navigationButton} onPressOut={() => navigation.navigate('Profile')}>
-                <Ionicons name="person" size={45} color={Scheme.darkPurple} />
+                <Ionicons name="person" size={45} color={getCurrentTheme()} />
             </Pressable>
         </View>
         </>
