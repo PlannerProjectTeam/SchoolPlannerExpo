@@ -3,35 +3,37 @@ import { View, Text, StyleSheet, Pressable, Dimensions, Switch } from "react-nat
 import { useState } from "react"
 import { globalStyles } from "@/constants/globalStyles"
 import { Octicons } from "@expo/vector-icons"
-import { Scheme } from "@/constants/globalStyles"
-import Toggle from "react-native-toggle-element"
+import { Colors } from "@/constants/globalStyles"
+import { useThemeContext } from "@/constants/ThemeProvider"
 
 
 export const SettingsSwitches =  () => {
     const [sundayStartEnabled, setSundayStartEnabled] = useState(false);
     const [twentyFourHourEnabled, setTwentyFourHourEnabled] = useState(false);
     const [darkModeEnabled, setDarkModeEnabled] = useState(false);
+
+    const { currentTheme, setCurrentTheme } = useThemeContext();
         
     return (
         <>
         {/* Unusable right now, issue with button appearing behind track (waiting for fix)
-        <Toggle onPress={() => (setTwentyFourHourEnabled(!twentyFourHourEnabled))} value={twentyFourHourEnabled} thumbButton={{ activeBackgroundColor: 'white', inActiveBackgroundColor: 'white', width: 25, height: 25, radius: 25, borderWidth: 1 }} trackBar={{ activeBackgroundColor: Scheme.darkPurple, inActiveBackgroundColor: 'grey', width: 40, height: 20, radius: 25 }} ></Toggle> */}
+        <Toggle onPress={() => (setTwentyFourHourEnabled(!twentyFourHourEnabled))} value={twentyFourHourEnabled} thumbButton={{ activeBackgroundColor: 'white', inActiveBackgroundColor: 'white', width: 25, height: 25, radius: 25, borderWidth: 1 }} trackBar={{ activeBackgroundColor: getCurrentTheme(), inActiveBackgroundColor: 'grey', width: 40, height: 20, radius: 25 }} ></Toggle> */}
        
         <Text style={[globalStyles.sectionHeadingText]}>Settings</Text>
 
         <View style={styles.switchContainer}>
-            <Switch style={styles.switch} trackColor={{false: '#767577', true: Scheme.darkPurple}} thumbColor={twentyFourHourEnabled ? 'white' : '#f4f3f4'} ios_backgroundColor="#3e3e3e" onValueChange={() => (setTwentyFourHourEnabled(!twentyFourHourEnabled))} value={twentyFourHourEnabled}></Switch>
-            <Text style={styles.switchText}>24-HOUR CLOCK</Text>
+            <Switch style={styles.switch} trackColor={{false: '#767577', true: currentTheme}} thumbColor={twentyFourHourEnabled ? 'white' : '#f4f3f4'} ios_backgroundColor="#3e3e3e" onValueChange={() => (setTwentyFourHourEnabled(!twentyFourHourEnabled))} value={twentyFourHourEnabled}></Switch>
+            <Text style={[styles.switchText, {color: currentTheme}]}>24-HOUR CLOCK</Text>
         </View>
         
         <View style={styles.switchContainer}>
-            <Switch style={styles.switch} trackColor={{false: '#767577', true: Scheme.darkPurple}} thumbColor={darkModeEnabled ? 'white' : '#f4f3f4'} ios_backgroundColor="#3e3e3e" onValueChange={() => (setDarkModeEnabled(!darkModeEnabled))} value={darkModeEnabled}></Switch>
-            <Text style={styles.switchText}>DARK MODE</Text>
+            <Switch style={styles.switch} trackColor={{false: '#767577', true: currentTheme}} thumbColor={darkModeEnabled ? 'white' : '#f4f3f4'} ios_backgroundColor="#3e3e3e" onValueChange={() => (setDarkModeEnabled(!darkModeEnabled))} value={darkModeEnabled}></Switch>
+            <Text style={[styles.switchText, {color: currentTheme}]}>DARK MODE</Text>
         </View>
         
         <View style={styles.switchContainer}>
-            <Switch style={styles.switch} trackColor={{false: '#767577', true: Scheme.darkPurple}} thumbColor={sundayStartEnabled ? 'white' : '#f4f3f4'} ios_backgroundColor="#3e3e3e" onValueChange={() => (setSundayStartEnabled(!sundayStartEnabled))} value={sundayStartEnabled}></Switch>
-            <Text style={styles.switchText}>START WEEK ON SUNDAY</Text>
+            <Switch style={styles.switch} trackColor={{false: '#767577', true: currentTheme}} thumbColor={sundayStartEnabled ? 'white' : '#f4f3f4'} ios_backgroundColor="#3e3e3e" onValueChange={() => (setSundayStartEnabled(!sundayStartEnabled))} value={sundayStartEnabled}></Switch>
+            <Text style={[styles.switchText, {color: currentTheme}]}>START WEEK ON SUNDAY</Text>
         </View>
         </>
     )
@@ -52,7 +54,6 @@ const styles = StyleSheet.create({
     },
     switchText: {
         marginLeft: 10,
-        color: Scheme.darkPurple,
         fontSize: 18,
         fontWeight: '200',
         textAlignVertical: 'center',

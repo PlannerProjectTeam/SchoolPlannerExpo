@@ -2,7 +2,8 @@ import React, { PropsWithChildren } from "react"
 import { View, Text, StyleSheet, Pressable, Dimensions } from "react-native"
 import { globalStyles } from "@/constants/globalStyles"
 import { Octicons } from "@expo/vector-icons"
-import { Scheme } from "@/constants/globalStyles"
+import { Colors } from "@/constants/globalStyles"
+import { useThemeContext } from "@/constants/ThemeProvider"
 
 type ItemCardProps = PropsWithChildren<{
     color: string,
@@ -12,6 +13,8 @@ type ItemCardProps = PropsWithChildren<{
 }>
 
 export const ItemCard =  ({color, title, subtitle, footer} : ItemCardProps) => {
+    const { currentTheme, setCurrentTheme } = useThemeContext();
+
     return (
         <View style={[styles.container, {borderColor: color}]}>
             <View style={[styles.textContainer]}>
@@ -21,9 +24,9 @@ export const ItemCard =  ({color, title, subtitle, footer} : ItemCardProps) => {
             </View>
 
             <Pressable style={styles.optionsContainer}>
-                <Octicons name="dot-fill" size={10} color={Scheme.darkPurple}/>
-                <Octicons name="dot-fill" size={10} color={Scheme.darkPurple}/>
-                <Octicons name="dot-fill" size={10} color={Scheme.darkPurple}/>
+                <Octicons name="dot-fill" size={10} color={currentTheme}/>
+                <Octicons name="dot-fill" size={10} color={currentTheme}/>
+                <Octicons name="dot-fill" size={10} color={currentTheme}/>
             </Pressable>
         </View>
     )

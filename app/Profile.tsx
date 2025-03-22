@@ -28,11 +28,12 @@ import { Entypo, Feather } from "@expo/vector-icons";
 import { LayoutRectangle, StyleProp, ViewStyle } from "react-native";
 
 // Custom
-import { globalStyles, Scheme } from "@/constants/globalStyles";
+import { globalStyles, Colors } from "@/constants/globalStyles";
 import { NavBar } from "@/components/elements/NavBar";
 import { RootStackParameters } from "./_layout";
 import { ThemeSelector } from "@/components/elements/ThemeSelector";
 import { SettingsSwitches } from "@/components/elements/SettingsSwitches";
+import { useThemeContext } from "@/constants/ThemeProvider";
 
 type ProfileProps = NativeStackScreenProps<RootStackParameters, 'Calendar'>
 
@@ -41,6 +42,9 @@ const Profile = ({navigation} : ProfileProps) => {
     const DefaultProfileImage = require('../assets/images/default_profile_picture.png');
 
     const [profileImageLayout, setProfileImageLayout] = useState<LayoutRectangle | null>(null)
+
+    // Theme
+    const { currentTheme, setCurrentTheme } = useThemeContext();
     
     const getProfileImageChangeButtonStyle = () => {
         if (profileImageLayout == null){
@@ -57,14 +61,14 @@ const Profile = ({navigation} : ProfileProps) => {
             borderRadius: 17,
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: Scheme.darkPurple
+            backgroundColor: currentTheme
         } as StyleProp<ViewStyle>
     }
 
     return (
         <>
         <ScrollView>
-            <View style={styles.profileHeader}>
+            <View style={[styles.profileHeader, {backgroundColor: currentTheme}]}>
                 <Text style={[globalStyles.subtitleText, styles.profileHeaderText]}>My Profile</Text>
                 
                 <View onLayout={(event : any) => (setProfileImageLayout(event.nativeEvent.layout))}>
@@ -78,7 +82,7 @@ const Profile = ({navigation} : ProfileProps) => {
 
             <View style={styles.extrasContainer}>
                 <Pressable style={styles.coursesButton} onPressOut={() => navigation.navigate('Courses')}>
-                    <Entypo name="book" size={24} color={Scheme.darkPurple} />
+                    <Entypo name="book" size={24} color={currentTheme} />
                     <Text style={styles.coursesButtonText}>Courses</Text>
                 </Pressable>
 
@@ -103,7 +107,6 @@ export default Profile
 
 const styles = StyleSheet.create({
     profileHeader: {
-        backgroundColor: Scheme.lightPurple,
         height: 175,
         justifyContent: 'flex-end',
         alignItems: 'center'
@@ -124,7 +127,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     coursesButtonText: {
-        color: Scheme.darkPurple,
         fontSize: 20,
         marginLeft: 10,
         textAlignVertical: 'center',
@@ -146,13 +148,11 @@ const styles = StyleSheet.create({
     },
 
     IDHeaderText: {
-        color: Scheme.darkPurple,
         fontSize: 20,
         fontWeight: 'bold',
         textAlign: 'right'
     },
     IDText: {
-        color: Scheme.darkPurple,
         fontSize: 25,
         fontWeight: '300',
         textAlign: 'right'

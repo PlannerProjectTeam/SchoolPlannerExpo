@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { TouchableOpacity } from 'react-native';
 
-import { Scheme } from '@/constants/globalStyles';
+import { Colors } from '@/constants/globalStyles';
 import { SVG } from './svgs/SVG';
 import EmptyView from './EmptyView';
 import { CheckMarkSVG } from './svgs/SVGStash';

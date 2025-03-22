@@ -18,10 +18,10 @@ import {
 } from 'react-native'
 
 // Custom
-import { globalStyles, Scheme } from "@/constants/globalStyles";
+import { globalStyles, Colors } from "@/constants/globalStyles";
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons'
-import { getCurrentTheme } from "@/classes/Themes";
+import { useThemeContext } from "@/constants/ThemeProvider";
 
 type ScreenNavigationProp<T extends keyof RootStackParameters> = NavigationProp<RootStackParameters, T>;
 type NavBarProps = {
@@ -31,6 +31,8 @@ type NavBarProps = {
 export const NavBar = ({navigation} : NavBarProps) => {
     const [navBarLayout, setNavBarLayout] = useState<LayoutRectangle | null>(null)
     const [navPopupSeen, setNavigationPopup] = useState(false);
+
+    const { currentTheme, setCurrentTheme } = useThemeContext();
     
     const getNavBarPopupContainerStyle = () => {
         if (navBarLayout == null){
@@ -47,8 +49,9 @@ export const NavBar = ({navigation} : NavBarProps) => {
             borderTopLeftRadius: 25,
             borderTopRightRadius: 25,
             alignItems: 'center',
-            backgroundColor: Scheme.darkPurple
+            backgroundColor: currentTheme
         } as StyleProp<ViewStyle>
+
     }
 
     return (
@@ -58,12 +61,12 @@ export const NavBar = ({navigation} : NavBarProps) => {
         {navPopupSeen == true?
             <View style={getNavBarPopupContainerStyle()}>
                 <Pressable style={styles.navigationPopupButton} onPressOut={() => {navigation.navigate('EditTask'); setNavigationPopup(false)}}>
-                    <Ionicons name="person" size={24} color={Scheme.darkPurple} />
+                    <Ionicons name="person" size={24} color={currentTheme} />
                     <Text style={styles.navigationPopupText}>Task</Text>
                 </Pressable>
 
                 <Pressable style={styles.navigationPopupButton} onPressOut={() => {navigation.navigate('EditEvent'); setNavigationPopup(false)}}>
-                    <Ionicons name="calendar" size={24} color={Scheme.darkPurple} />
+                    <Ionicons name="calendar" size={24} color={currentTheme} />
                     <Text style={styles.navigationPopupText}>Event</Text>
                 </Pressable>
             </View>
@@ -71,15 +74,15 @@ export const NavBar = ({navigation} : NavBarProps) => {
 
         <View style={styles.navigationBar} onLayout={(event : any) => (setNavBarLayout(event.nativeEvent.layout))}>
             <Pressable style={styles.navigationButton} onPressOut={() => navigation.navigate('Calendar')}>
-                <Ionicons name="calendar" size={45} color={getCurrentTheme()} />
+                <Ionicons name="calendar" size={45} color={currentTheme} />
             </Pressable>
 
             <Pressable style={styles.navigationButton} onPressOut={() => (setNavigationPopup(!navPopupSeen))}>
-                <Ionicons name="add-circle" size={70} color={getCurrentTheme()} />
+                <Ionicons name="add-circle" size={70} color={currentTheme} />
             </Pressable>
 
             <Pressable style={styles.navigationButton} onPressOut={() => navigation.navigate('Profile')}>
-                <Ionicons name="person" size={45} color={getCurrentTheme()} />
+                <Ionicons name="person" size={45} color={currentTheme} />
             </Pressable>
         </View>
         </>
@@ -104,11 +107,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         height: '80%',
         backgroundColor: 'white',
-        borderColor: Scheme.darkPurple,
 
-        // Android
         elevation: 5,
-        // IOS
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.25,
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     },
     
     navigationPopupText: {
-        color: Scheme.darkGrey,
+        color: Colors.darkGrey,
         fontSize: 20,
         marginLeft: 5
     },

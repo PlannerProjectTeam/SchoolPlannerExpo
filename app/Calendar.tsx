@@ -21,14 +21,14 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Switch } from "react-native";
 
 // Custom
-import { globalStyles, Scheme } from "@/constants/globalStyles";
+import { globalStyles, Colors } from "@/constants/globalStyles";
 import { NavBar } from "@/components/elements/NavBar";
 import { ListMode } from "@/components/containers/ListMode";
 import { DayMode } from "@/components/containers/DayMode";
 import { WeekMode } from "@/components/containers/WeekMode";
 import { DateSelection } from "@/components/containers/DateSelection";
 import { RootStackParameters } from "./_layout";
-import { setCurrentTheme } from "@/classes/Themes";
+import { useThemeContext } from "@/constants/ThemeProvider";
 
 
 export type CalendarProps = NativeStackScreenProps<RootStackParameters, 'Calendar'>;
@@ -49,13 +49,15 @@ const Calendar = ({navigation} : CalendarProps) => {
         setWeekMode(mode == calendarMode.WeekMode);
     }
 
+    const { currentTheme, setCurrentTheme } = useThemeContext();
+
     return (
         <>
         <ScrollView style={styles.screenContainer} showsVerticalScrollIndicator={false}>
             <DateSelection/>
             <View style={styles.listModeSwitchContainer}>
                 <Text style={[styles.listModeSwitchText, globalStyles.switchText]}>LIST MODE</Text>
-                <Switch style={styles.listModeSwitch} trackColor={{false: '#767577', true: Scheme.darkPurple}} thumbColor={isListMode ? 'white' : '#f4f3f4'} ios_backgroundColor="#3e3e3e" onValueChange={() => {setListMode(!isListMode)}} value={isListMode}></Switch>
+                <Switch style={styles.listModeSwitch} trackColor={{false: '#767577', true: currentTheme}} thumbColor={isListMode ? 'white' : '#f4f3f4'} ios_backgroundColor="#3e3e3e" onValueChange={() => {setListMode(!isListMode)}} value={isListMode}></Switch>
             </View>
             {isListMode? <ListMode/> : null}
             {isDayMode? <DayMode/> : null}

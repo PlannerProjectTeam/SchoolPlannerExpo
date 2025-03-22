@@ -14,11 +14,13 @@ import Profile from './Profile';
 import EditTask from './EditTask';
 import EditEvent from './EditEvent';
 import Courses from './Courses';
+import { ThemeProvider } from '@/constants/ThemeProvider';
 
 export type RootStackParameters = {
   Calendar : undefined,
   Profile : undefined,
   EditTask: undefined,
+
   EditEvent : undefined,
   Courses : undefined
 }
@@ -26,15 +28,18 @@ export type RootStackParameters = {
 const Stack = createNativeStackNavigator<RootStackParameters>();
 
 export default function RootLayout() {
-    return (
-        <Stack.Navigator initialRouteName='Calendar'>
-          <Stack.Screen name="Calendar" component={Calendar} options={options}/>
-          <Stack.Screen name="EditEvent" component={EditEvent} options={options}/>
-          <Stack.Screen name="EditTask" component={EditTask} options={options}/>
-          <Stack.Screen name="Profile" component={Profile} options={options}/>
-          <Stack.Screen name="Courses" component={Courses} options={options}/>
-        </Stack.Navigator>
-    );
+
+  return (
+    <ThemeProvider>
+      <Stack.Navigator initialRouteName='Calendar'>
+        <Stack.Screen name="Calendar" component={Calendar} options={options}/>
+        <Stack.Screen name="EditEvent" component={EditEvent} options={options}/>
+        <Stack.Screen name="EditTask" component={EditTask} options={options}/>
+        <Stack.Screen name="Profile" component={Profile} options={options}/>
+        <Stack.Screen name="Courses" component={Courses} options={options}/>
+      </Stack.Navigator>
+    </ThemeProvider>
+  );
 }
 
 const options = {
