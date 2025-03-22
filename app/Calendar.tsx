@@ -30,10 +30,7 @@ import { DateSelection } from "@/components/containers/DateSelection";
 import { RootStackParameters } from "./_layout";
 import { useThemeContext } from "@/constants/ThemeProvider";
 
-
-export type CalendarProps = NativeStackScreenProps<RootStackParameters, 'Calendar'>;
-
-const Calendar = ({navigation} : CalendarProps) => {
+const Calendar = ({navigation} : any) => {
 
     enum calendarMode {
         ListMode, DayMode, WeekMode

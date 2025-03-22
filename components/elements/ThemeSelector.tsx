@@ -1,10 +1,9 @@
 import React, { PropsWithChildren } from "react"
 import { View, Text, StyleSheet, Pressable, Dimensions, TouchableOpacity } from "react-native"
 import { globalStyles } from "@/constants/globalStyles"
-import { Feather } from "@expo/vector-icons"
+import { Feather, FontAwesome } from "@expo/vector-icons"
 import { Colors } from "@/constants/globalStyles"
 import { Themes, useThemeContext } from "@/constants/ThemeProvider"
-
 
 export const ThemeSelector =  () => {
     const { currentTheme, setCurrentTheme } = useThemeContext();
@@ -31,8 +30,16 @@ export const ThemeSelector =  () => {
                 {Object.entries(Themes).map(([themeName, themeHex]) => (
                     <TouchableOpacity key={themeName} onPress={() => setCurrentTheme(themeHex)}>
                         <View style={styles.singleThemeContainer}>
-                            <View style={[styles.themeSquare, { backgroundColor: themeHex }]}/>
-                            <View style={[styles.themeSquare, { backgroundColor: lightenColor(themeHex) }]}/>
+                            <View style={[styles.themeSquare, { backgroundColor: themeHex }]}>
+                                {currentTheme == themeHex?
+                                    <FontAwesome name="check" size={18} color={Colors.veryLightGrey}/>
+                                : null}
+                            </View>
+                            <View style={[styles.themeSquare, { backgroundColor: lightenColor(themeHex) }]}>
+                                {currentTheme == themeHex?
+                                    <FontAwesome name="check" size={18} color={Colors.veryLightGrey}/>
+                                : null}
+                            </View>
                         </View>
                     </TouchableOpacity>
                 ))}
@@ -79,6 +86,8 @@ const styles = StyleSheet.create({
         maxWidth: 240
     },
     themeSquare: {
+        justifyContent: 'center',
+        alignItems: 'center',
         borderRadius: 5,
         width: 35,
         height: 35,
