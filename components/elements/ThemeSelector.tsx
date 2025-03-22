@@ -1,5 +1,4 @@
-import React, { PropsWithChildren } from "react"
-import { View, Text, StyleSheet, Pressable, Dimensions, TouchableOpacity } from "react-native"
+import { View, Text, StyleSheet, Dimensions, TouchableOpacity } from "react-native"
 import { globalStyles } from "@/constants/globalStyles"
 import { Feather, FontAwesome } from "@expo/vector-icons"
 import { Colors } from "@/constants/globalStyles"
@@ -58,7 +57,6 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         borderRadius: 20,
         marginTop: 20,
-        marginBottom: 15,
         paddingRight: 10,
         backgroundColor: Colors.veryLightGrey
     },

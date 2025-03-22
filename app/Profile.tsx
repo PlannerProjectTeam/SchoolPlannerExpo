@@ -10,39 +10,27 @@
  * @version 0.1.0 02/01/25
  */
 
-import React, { useState } from "react";
-
 import {
     View,
-    Text,
     StyleSheet,
-    Image,
-    Pressable,
-    Switch,
-    ScrollView
+    ScrollView,
+    Dimensions
 } from 'react-native'
-
-// 3rd Party 
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 // Custom
 import { NavBar } from "@/components/elements/NavBar";
-import { RootStackParameters } from "./_layout";
 import { ThemeSelector } from "@/components/elements/ThemeSelector";
-import { SettingsSwitches } from "@/components/elements/SettingsSwitches";
-import { useThemeContext } from "@/constants/ThemeProvider";
+import { SettingToggles } from "@/components/elements/SettingsToggles";
 import { ReminderSelector } from "@/components/elements/ReminderSelector";
-import { ProfileSection } from "@/components/elements/ProfileSection";
+import { ProfileSection } from "@/components/containers/ProfileSection";
 
 const Profile = ({navigation} : any) => {
-    const { currentTheme, setCurrentTheme } = useThemeContext();
-
     return (
         <>
         <ScrollView>
             <ProfileSection navigation={navigation}/>
             <View style={styles.settingsContainer}>
-                <SettingsSwitches/>
+                <SettingToggles/>
                 <ThemeSelector/>
                 <ReminderSelector/>
             </View>
@@ -56,6 +44,14 @@ const Profile = ({navigation} : any) => {
 export default Profile
 
 const styles = StyleSheet.create({
+    settingsContainer: {
+        marginHorizontal: 20,
+        justifyContent: 'flex-start',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        marginBottom: Dimensions.get('screen').height * 0.15,
+    },
+
     profileHeader: {
         height: 175,
         justifyContent: 'flex-end',
@@ -89,15 +85,4 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center'
     },
-
-    settingsContainer: {
-        marginHorizontal: 20,
-        justifyContent: 'flex-start',
-        flexDirection: 'column',
-        alignItems: 'flex-start',
-    },
-
-    leftMargin: {
-        marginHorizontal: 10,
-    }
 })

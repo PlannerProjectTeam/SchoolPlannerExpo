@@ -2,17 +2,16 @@ import React, { PropsWithChildren } from "react"
 import { View, Text, StyleSheet, Pressable, Dimensions } from "react-native"
 import { globalStyles } from "@/constants/globalStyles"
 import { Octicons } from "@expo/vector-icons"
-import { Colors } from "@/constants/globalStyles"
 import { useThemeContext } from "@/constants/ThemeProvider"
 
-type ItemCardProps = PropsWithChildren<{
+type ListModeCardProps = PropsWithChildren<{
     color: string,
     title: string,
     subtitle: string,
     footer: string,
 }>
 
-export const ItemCard =  ({color, title, subtitle, footer} : ItemCardProps) => {
+export const ListModeCard =  ({color, title, subtitle, footer} : ListModeCardProps) => {
     const { currentTheme, setCurrentTheme } = useThemeContext();
 
     return (

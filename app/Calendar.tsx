@@ -10,24 +10,19 @@ import {
     View,
     Text,
     StyleSheet,
-    Dimensions,
-    SafeAreaView,
-    Pressable,
     ScrollView
 } from 'react-native'
 
 // 3rd Party 
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Switch } from "react-native";
 
 // Custom
-import { globalStyles, Colors } from "@/constants/globalStyles";
+import { globalStyles } from "@/constants/globalStyles";
 import { NavBar } from "@/components/elements/NavBar";
 import { ListMode } from "@/components/containers/ListMode";
 import { DayMode } from "@/components/containers/DayMode";
 import { WeekMode } from "@/components/containers/WeekMode";
 import { DateSelection } from "@/components/containers/DateSelection";
-import { RootStackParameters } from "./_layout";
 import { useThemeContext } from "@/constants/ThemeProvider";
 
 const Calendar = ({navigation} : any) => {
@@ -74,11 +69,11 @@ const styles = StyleSheet.create({
 
     listModeSwitchContainer: {
         marginHorizontal: 25,
-        marginVertical: 0,
         alignItems: 'center',
         flexDirection: 'row',
         alignSelf: 'flex-end',
         margin: 10,
+        maxHeight: 30,
     },
     listModeSwitch: {
         transform: [{ scaleX: 1 }, { scaleY: 1 }],

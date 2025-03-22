@@ -1,17 +1,25 @@
 
-import { Image, View, Text, StyleSheet, Pressable, Dimensions, Switch, StyleProp, ViewStyle, LayoutRectangle } from "react-native"
+import { Image, View, Text, StyleSheet, Pressable, Dimensions, Switch, StyleProp, ViewStyle, LayoutRectangle, TouchableOpacity } from "react-native"
 import { useState } from "react"
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParameters } from "@/app/_layout";
 import { globalStyles } from "@/constants/globalStyles"
 import { Entypo, Feather } from "@expo/vector-icons";
 import { useThemeContext } from "@/constants/ThemeProvider"
+import { getProfilePicture, uploadProfilePicture } from "../elements/ProfilePictureUpload";
 
 export const ProfileSection =  ({navigation} : any) => {
     const { currentTheme, setCurrentTheme } = useThemeContext();
-    
-    const DefaultProfileImage = require('@/assets/images/default_profile_picture.png');
+
     const [profileImageLayout, setProfileImageLayout] = useState<LayoutRectangle | null>(null)
+    const [profileImageSource, setProfileImageSource] = useState(getProfilePicture());
+
+    const handleProfilePictureUpload = async () => {
+        try {
+          await uploadProfilePicture();
+          setProfileImageSource(getProfilePicture());
+        } catch (error) {
+          console.error('Upload failed:', error);
+        }
+      };
 
     const getProfileImageChangeButtonStyle = () => {
         if (profileImageLayout == null){
@@ -38,12 +46,12 @@ export const ProfileSection =  ({navigation} : any) => {
             <Text style={[globalStyles.subtitleText, styles.profileHeaderText]}>My Profile</Text>
             
             <View onLayout={(event : any) => (setProfileImageLayout(event.nativeEvent.layout))}>
-                <Image source={DefaultProfileImage} style={styles.profileImage}/>
+                <Image source={profileImageSource} style={styles.profileImage}/>
             </View>
 
-            <View style={getProfileImageChangeButtonStyle()}>
+            <TouchableOpacity style={getProfileImageChangeButtonStyle()} onPress={handleProfilePictureUpload}>
                 <Feather name="edit-3" size={20} color="white" />
-            </View>
+            </TouchableOpacity>
         </View>
 
         <View style={styles.extrasContainer}>
@@ -75,6 +83,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     profileImage: {
+        borderRadius: 75,
         width: 150,
         height: 150,
         marginBottom: -50
