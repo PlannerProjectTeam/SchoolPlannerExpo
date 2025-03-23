@@ -20,7 +20,7 @@ import { ProfileSection } from "@/src/features/profile/components/ProfileSection
 const Profile = ({navigation} : any) => {
     return (
         <>
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
             <ProfileSection navigation={navigation}/>
             <View style={styles.settingsContainer}>
                 <SettingToggles/>

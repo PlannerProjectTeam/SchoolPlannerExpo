@@ -51,12 +51,12 @@ export const NavigationBar = ({navigation} : NavBarProps) => {
 
         {navPopupSeen == true?
             <View style={getNavBarPopupContainerStyle()}>
-                <Pressable style={styles.navigationPopupButton} onPressOut={() => {navigation.navigate('EditTask'); setNavigationPopup(false)}}>
+                <Pressable style={styles.navigationPopupButton} onPress={() => {navigation.navigate('EditTask'); setNavigationPopup(false)}}>
                     <Ionicons name="person" size={24} color={currentTheme} />
                     <Text style={styles.navigationPopupText}>Task</Text>
                 </Pressable>
 
-                <Pressable style={styles.navigationPopupButton} onPressOut={() => {navigation.navigate('EditEvent'); setNavigationPopup(false)}}>
+                <Pressable style={styles.navigationPopupButton} onPress={() => {navigation.navigate('EditEvent'); setNavigationPopup(false)}}>
                     <Ionicons name="calendar" size={24} color={currentTheme} />
                     <Text style={styles.navigationPopupText}>Event</Text>
                 </Pressable>
@@ -64,15 +64,15 @@ export const NavigationBar = ({navigation} : NavBarProps) => {
         : null}
 
         <View style={styles.navigationBar} onLayout={(event : any) => (setNavBarLayout(event.nativeEvent.layout))}>
-            <Pressable style={styles.navigationButton} onPressOut={() => navigation.navigate('Calendar')}>
+            <Pressable style={styles.navigationButton} onPress={() => navigation.navigate('Calendar')}>
                 <Ionicons name="calendar" size={45} color={currentTheme} />
             </Pressable>
 
-            <Pressable style={styles.navigationButton} onPressOut={() => (setNavigationPopup(!navPopupSeen))}>
+            <Pressable style={styles.navigationButton} onPress={() => (setNavigationPopup(!navPopupSeen))}>
                 <Ionicons name="add-circle" size={70} color={currentTheme} />
             </Pressable>
 
-            <Pressable style={styles.navigationButton} onPressOut={() => navigation.navigate('Profile')}>
+            <Pressable style={styles.navigationButton} onPress={() => navigation.navigate('Profile')}>
                 <Ionicons name="person" size={45} color={currentTheme} />
             </Pressable>
         </View>

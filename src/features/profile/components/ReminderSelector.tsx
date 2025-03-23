@@ -6,17 +6,40 @@
  * @date 03/22/25
  */
 
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { View, Text, StyleSheet, Dimensions, TouchableOpacity } from "react-native"
 import { globalStyles } from "@/src/shared/style/globalStyles"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 import { Colors } from "@/src/shared/style/globalStyles"
 import { useThemeContext } from "@/src/shared/state/themeProvider"
 import { REMINDER_INTERVALS } from "../types/reminderIntervals"
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export const ReminderSelector =  () => {
-    const { currentTheme, setCurrentTheme } = useThemeContext();
+    const { currentTheme } = useThemeContext();
+
     const [ enabledReminderIntervals, setEnabledReminderIntervals ] = useState<number[]>([]);
+
+    useEffect(() => {
+        const loadSettings = async () => {
+            try {
+                const storedIntervals = await AsyncStorage.getItem('enabledReminderIntervals');
+                if (storedIntervals !== null) { setEnabledReminderIntervals(JSON.parse(storedIntervals)); }
+            } catch (error) {}
+        };
+
+        loadSettings();
+    }, []);
+
+    useEffect(() => {
+        const saveSettings = async () => {
+            try {
+                await AsyncStorage.setItem('enabledReminderIntervals', JSON.stringify(enabledReminderIntervals));
+            } catch (error) {}
+        };
+
+        saveSettings();
+    }, [enabledReminderIntervals]);
 
     const toggleInterval = (intervalHour : number) => {
         if (enabledReminderIntervals.includes(intervalHour)) {
@@ -37,11 +60,11 @@ export const ReminderSelector =  () => {
             <View style={styles.allThemesContainer}>
                 {Object.entries(REMINDER_INTERVALS).map(([key, interval]) => (
                     enabledReminderIntervals.includes(interval.hourDuration)?
-                        <TouchableOpacity style={[styles.intervalButton, {backgroundColor: currentTheme}]} key={interval.displayName} onPressIn={() => (toggleInterval(interval.hourDuration))}>
+                        <TouchableOpacity style={[styles.intervalButton, {backgroundColor: currentTheme}]} key={interval.displayName} onPress={() => (toggleInterval(interval.hourDuration))}>
                             <Text style={[styles.intervalText, {color: 'white'}]}>{interval.displayName}</Text>
                         </TouchableOpacity>
                     :
-                        <TouchableOpacity style={[styles.intervalButton, {backgroundColor: 'white'}]} key={interval.displayName} onPressIn={() => (toggleInterval(interval.hourDuration))}>
+                        <TouchableOpacity style={[styles.intervalButton, {backgroundColor: 'white'}]} key={interval.displayName} onPress={() => (toggleInterval(interval.hourDuration))}>
                             <Text style={[styles.intervalText, {color: 'black'}]}>{interval.displayName}</Text>
                         </TouchableOpacity>
                 ))}
