@@ -53,18 +53,19 @@ export const ReminderSelector =  () => {
         <>
         <View style={styles.container}>
             <View style={styles.iconContainer}>
-            <MaterialCommunityIcons name="bell-ring" size={45} color={currentTheme} />
+                <MaterialCommunityIcons name="bell-ring" size={45} color={currentTheme} />
                 <Text style={globalStyles.descriptionText}>REMIND</Text>
+                <Text style={[globalStyles.tinyText, {textAlign: 'center'}]}>Push notification intervals before all events.</Text>
             </View>
             
             <View style={styles.allThemesContainer}>
                 {Object.entries(REMINDER_INTERVALS).map(([key, interval]) => (
                     enabledReminderIntervals.includes(interval.hourDuration)?
-                        <TouchableOpacity style={[styles.intervalButton, {backgroundColor: currentTheme}]} key={interval.displayName} onPress={() => (toggleInterval(interval.hourDuration))}>
+                        <TouchableOpacity style={[styles.intervalButton, {backgroundColor: currentTheme}]} key={key} onPress={() => (toggleInterval(interval.hourDuration))}>
                             <Text style={[styles.intervalText, {color: 'white'}]}>{interval.displayName}</Text>
                         </TouchableOpacity>
                     :
-                        <TouchableOpacity style={[styles.intervalButton, {backgroundColor: 'white'}]} key={interval.displayName} onPress={() => (toggleInterval(interval.hourDuration))}>
+                        <TouchableOpacity style={[styles.intervalButton, {backgroundColor: 'white'}]} key={key} onPress={() => (toggleInterval(interval.hourDuration))}>
                             <Text style={[styles.intervalText, {color: 'black'}]}>{interval.displayName}</Text>
                         </TouchableOpacity>
                 ))}

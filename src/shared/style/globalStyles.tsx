@@ -32,6 +32,10 @@ export const globalStyles = StyleSheet.create({
         fontSize: 12,
         color: Colors.darkGrey
     },
+    tinyText: {
+        fontSize: 8,
+        fontWeight: '400',
+    },
     sectionHeadingText: {
         fontFamily: 'Lato',
         fontSize: 25,

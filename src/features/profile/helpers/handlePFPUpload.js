@@ -1,41 +1,33 @@
 /**
  * Handles upload for the user's profile picture. Saved to cache.
  * @author Cyrus M. // Last modified by.
- * @date 03/22/25
+ * @date 03/23/25
  */
 
-import { Platform } from 'react-native';
-import DocumentPicker from 'react-native-document-picker';
-import RNFS from 'react-native-fs';
-import { MMKV } from 'react-native-mmkv';
+import * as DocumentPicker from 'expo-document-picker';
+import * as FileSystem from 'expo-file-system';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { DefaultProfileImage } from '@/src/assets/images/images';
 
-const storage = new MMKV();
 const PROFILE_PICTURE_KEY = "userProfilePicture";
 
-export const uploadProfilePicture = async () => {w
-    console.log('upload');
+export const uploadProfilePicture = async () => {
     try {
-        const res = await DocumentPicker.pickSingle({ type: [DocumentPicker.types.images], });
-        if (!res?.uri) { return null; }
-        const newPath = `${RNFS.CachesDirectoryPath}/${res.name}`;
-        await RNFS.copyFile(res.uri, newPath)
-        storage.set(PROFILE_PICTURE_KEY, newPath);
-
-    } catch (err) {
-        console.error('There was a problemo');
-    }
+        const result = await DocumentPicker.getDocumentAsync({ type: "image/*" });
+        if (!result.canceled && result.assets != null && result.assets.length > 0) {
+            const pickedAsset = result.assets[0];
+            const newPath = `${FileSystem.cacheDirectory}${pickedAsset.name}`;
+            await FileSystem.copyAsync({ from: pickedAsset.uri, to: newPath });
+            await AsyncStorage.setItem(PROFILE_PICTURE_KEY, newPath);
+        }
+    } catch (err) {}
 };
 
-export const getProfilePicture = () => {
-    const storedUri = storage.getString(PROFILE_PICTURE_KEY);
-
-    if (storedUri) {
-		if (Platform.OS === 'android'){
-			return { uri: `file://${storedUri}` };
-		} else {
-			return { uri: storedUri };
-		}
+export const getProfilePicture = async () => { 
+    const storedUri = await AsyncStorage.getItem(PROFILE_PICTURE_KEY);
+    const fileInfo = await FileSystem.getInfoAsync(storedUri);
+    if (fileInfo.exists) {
+        return { uri: storedUri };
     } else {
         return DefaultProfileImage;
     }

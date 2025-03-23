@@ -7,31 +7,32 @@
  */
 
 import { Image, View, Text, StyleSheet, Pressable, StyleProp, ViewStyle, LayoutRectangle, TouchableOpacity } from "react-native"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { globalStyles } from "@/src/shared/style/globalStyles"
 import { Entypo, Feather } from "@expo/vector-icons";
 import { useThemeContext } from "@/src/shared/state/themeProvider"
 import { getProfilePicture, uploadProfilePicture } from "../helpers/handlePFPUpload";
 
 export const ProfileSection =  ({navigation} : any) => {
-    const { currentTheme, setCurrentTheme } = useThemeContext();
-
+    const {currentTheme} = useThemeContext();
+    const [profileImageSource, setProfileImageSource] = useState();
     const [profileImageLayout, setProfileImageLayout] = useState<LayoutRectangle | null>(null)
-    const [profileImageSource, setProfileImageSource] = useState(getProfilePicture());
+
+    useEffect(() => {
+        const loadProfilePicture = async () => {
+            setProfileImageSource(await getProfilePicture());
+        };
+        
+        loadProfilePicture();
+    }, []);
 
     const handleProfilePictureUpload = async () => {
-        try {
-          await uploadProfilePicture();
-          setProfileImageSource(getProfilePicture());
-        } catch (error) {
-          console.error('Upload failed:', error);
-        }
-      };
+        await uploadProfilePicture().catch();
+        setProfileImageSource(await getProfilePicture().catch());
+    };
 
     const getProfileImageChangeButtonStyle = () => {
-        if (profileImageLayout == null){
-            return { /* No properties */}
-        }
+        if (profileImageLayout == null){ return { /* No properties */} }
 
         return {
             position: 'absolute',

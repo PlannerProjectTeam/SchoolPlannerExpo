@@ -84,18 +84,17 @@ const styles = StyleSheet.create({
         maxWidth: 240
     },
     singleThemeContainer: {
-        flex: 3,
+        flex: 1,
         flexDirection: 'column',
         flexWrap: 'wrap',
         justifyContent: 'center',
         alignContent: 'center',
-        maxWidth: 240
     },
     themeSquare: {
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 5,
-        width: 35,
-        height: 35,
+        width: 30,
+        height: 30,
     }
 })

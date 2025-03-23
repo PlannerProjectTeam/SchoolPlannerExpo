@@ -1,12 +1,12 @@
-export enum ITEM_CARD_TYPES {
+export enum CARD_CATEGORY {
     Task, Event, Course
 }
 
-export interface ITEM_CARD_DATA {
+export interface LIST_MODE_CARD {
     id: number      
     color: string
     title: string
     subtitle: string
     footer: string
-    type: ITEM_CARD_TYPES
+    type: CARD_CATEGORY
 }

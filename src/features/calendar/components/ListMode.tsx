@@ -10,7 +10,7 @@ import { View, Text, StyleSheet, Dimensions } from "react-native"
 import { globalStyles } from "@/src/shared/style/globalStyles"
 import { ListModeCard } from "./ListModeCard"
 import { ItemCardFakeData } from "@/testing/fake-data/itemcards"
-import { ITEM_CARD_TYPES } from "@/src/features/calendar/types/ItemCardData"
+import { CARD_CATEGORY } from "@/src/features/calendar/types/ListModeCard"
 
 export const ListMode = () => {
 
@@ -19,19 +19,19 @@ export const ListMode = () => {
         <View style={[styles.container]}>
             <Text style={[globalStyles.sectionHeadingText, styles.verticalMargin]}> Tasks </Text>
             {[...ItemCardFakeData].map(({id, color, title, subtitle, footer, type}) => (
-                type == ITEM_CARD_TYPES.Task? 
+                type == CARD_CATEGORY.Task? 
                     <ListModeCard key={id} color={color} title={title} subtitle={subtitle} footer={footer}/> 
                 : null ))}
 
             <Text style={[globalStyles.sectionHeadingText, styles.verticalMargin]}> Events </Text>
             {[...ItemCardFakeData].map(({id, color, title, subtitle, footer, type}) => (
-                type == ITEM_CARD_TYPES.Event? 
+                type == CARD_CATEGORY.Event? 
                     <ListModeCard key={id} color={color} title={title} subtitle={subtitle} footer={footer}/> 
                 : null ))}
 
             <Text style={[globalStyles.sectionHeadingText, styles.verticalMargin]}> Courses </Text>
             {[...ItemCardFakeData].map(({id, color, title, subtitle, footer, type}) => (
-                type == ITEM_CARD_TYPES.Course? 
+                type == CARD_CATEGORY.Course? 
                     <ListModeCard key={id} color={color} title={title} subtitle={subtitle} footer={footer}/> 
                 : null ))}
         </View>

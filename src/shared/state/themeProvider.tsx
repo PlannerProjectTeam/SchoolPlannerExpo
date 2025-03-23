@@ -7,6 +7,7 @@ export enum Themes {
     Yellow = '#565844',
     Orange = '#584944',
     Red = '#664A4A',
+    Grey = '#545454',
 }
 
 interface ThemeContextType {

@@ -13,5 +13,5 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts", 
-    "src/features/profile/helpers/handlePFPUpload.js", "src/features/profile/types/reminderIntervals.ts", "src/features/calendar/types/ItemCardData.ts"  ]
+    "src/features/profile/helpers/handlePFPUpload.js", "src/features/profile/types/reminderIntervals.ts", "src/features/calendar/types/ListModeCard.ts"  ]
 }
