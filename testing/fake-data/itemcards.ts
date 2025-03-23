@@ -1,5 +1,5 @@
-import { ItemCardData } from "@/classes/ItemCardData"
-import { ItemCardTypes } from "@/classes/ItemCardData"
+import { ItemCardData } from "@/src/features/calendar/types/ItemCardData"
+import { ITEM_CARD_TYPES } from "@/src/features/calendar/types/ItemCardData"
 
 export const ItemCardFakeData : ItemCardData[] = [
     {
@@ -8,7 +8,7 @@ export const ItemCardFakeData : ItemCardData[] = [
         title: 'Calculus HW #3',
         subtitle: 'Calculus II',
         footer: 'Due: 11/10',
-        type: ItemCardTypes.Task
+        type: ITEM_CARD_TYPES.Task
     },
     {
         id: 1,
@@ -16,7 +16,7 @@ export const ItemCardFakeData : ItemCardData[] = [
         title: 'Do Laundry',
         subtitle: 'Calculus II',
         footer: 'Jeans specifically need washing',
-        type: ItemCardTypes.Task
+        type: ITEM_CARD_TYPES.Task
     },
 
     {
@@ -25,7 +25,7 @@ export const ItemCardFakeData : ItemCardData[] = [
         title: 'First-Gen Club',
         subtitle: '4PM - 5PM',
         footer: 'Remember to show up early',
-        type: ItemCardTypes.Event
+        type: ITEM_CARD_TYPES.Event
     },
     
     {
@@ -34,7 +34,7 @@ export const ItemCardFakeData : ItemCardData[] = [
         title: '10 - 11AM',
         subtitle: 'Computer Systems',
         footer: 'KH108',
-        type: ItemCardTypes.Course
+        type: ITEM_CARD_TYPES.Course
     },
     {
         id: 4,
@@ -42,7 +42,7 @@ export const ItemCardFakeData : ItemCardData[] = [
         title: '12 - 1PM',
         subtitle: 'Calculus II',
         footer: 'BT114',
-        type: ItemCardTypes.Course
+        type: ITEM_CARD_TYPES.Course
     },
     {
         id: 5,
@@ -50,6 +50,6 @@ export const ItemCardFakeData : ItemCardData[] = [
         title: '4 - 6PM',
         subtitle: 'Chamber Ensemble',
         footer: 'Recital Room',
-        type: ItemCardTypes.Course
+        type: ITEM_CARD_TYPES.Course
     },
 ]
