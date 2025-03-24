@@ -1,11 +1,20 @@
+/**
+ * Decrease swipe sensitivity
+ * When changing weeks/months, stay on the corresponding day
+ * PureComponent & shouldComponentUpdate for React performance best practices
+ * Make test tasks. Clicking on a day will bring up the tasks tighed to it
+ * Increase touch space for the user when clicking on a day
+ */
+
 import React, { useState } from 'react';
 import {
   Calendar,
   LocaleConfig,
   ExpandableCalendar,
   CalendarProvider,
+  AgendaList,
 } from 'react-native-calendars';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Text, FlatList } from 'react-native';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 
 LocaleConfig.locales['en'] = {
@@ -52,11 +61,19 @@ LocaleConfig.locales['en'] = {
 LocaleConfig.defaultLocale = 'en';
 new LocaleConfig().toString('d MMMM, yyyy');
 
-const MonthlyCalendar = () => {
-  // const [selected, setSelected] = useState('');
+interface Task {
+  name: string;
+  description: string;
+}
 
+interface TaskList {
+  [data: string]: Task[];
+}
+
+const MonthlyCalendar = () => {
   const [selected, setSelected] = useState(null);
   const [markedDates, setMarkedDates] = useState({});
+  const [selectedDate, setSelectedDate] = useState('2025-03-23');
 
   const handleDayPress = (day: any) => {
     setSelected(day.dateString);
@@ -68,6 +85,18 @@ const MonthlyCalendar = () => {
       },
     });
   };
+
+  const items: TaskList = {
+    '2025-03-10': [{ name: 'test', description: 'testing' }],
+    '2025-03-20': [{ name: 'ha', description: 'he' }],
+  };
+
+  const renderItem = ({ item }: { item: Task }) => (
+    <View>
+      <Text>{item.name}</Text>
+      <Text>{item.description}</Text>
+    </View>
+  );
 
   return (
     <SafeAreaProvider>
@@ -102,7 +131,24 @@ const MonthlyCalendar = () => {
             enableSwipeMonths
             closeOnDayPress={false}
           />
-        </CalendarProvider>
+          <View>
+            <Text>Tasks for {selectedDate}</Text>
+            {items[selectedDate]?.length > 0 ? (
+              <FlatList
+                data={items[selectedDate]}
+                renderItem={renderItem}
+                keyExtractor={(_, index) => index.toString()}
+              />
+            ) : (
+              <Text>No tasks for this day</Text>
+            )}
+          </View>
+          {/* <AgendaList
+            sections={items}
+            renderItem={renderItem}
+            scrollToNextEvent={false}
+          /> */}
+        </CalendarProvider> 
       </SafeAreaView>
     </SafeAreaProvider>
   );
