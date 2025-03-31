@@ -5,14 +5,13 @@
  */
 
 import React from "react";
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet, Pressable, ViewStyle, TouchableOpacity, LayoutRectangle, ScrollView } from "react-native";
 
-const Courses = () => {
+const Courses = ({navigation}: any) => {
     return (
-        <View>
-            <Text>Courses</Text>
-        </View>
+        <ScrollView showsVerticalScrollIndicator={false}>
+            
+        </ScrollView>
     )
 }
 
-export default Courses
