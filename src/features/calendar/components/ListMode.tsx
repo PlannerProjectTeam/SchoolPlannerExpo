@@ -9,7 +9,7 @@ import React from "react"
 import { View, Text, StyleSheet, Dimensions } from "react-native"
 import { globalStyles } from "@/src/shared/style/globalStyles"
 import { ListModeCard } from "./ListModeCard"
-import { ItemCardFakeData } from "@/testing/fake-data/itemcards"
+import { CoursesFakeData, EventsFakeData, TasksFakeData } from "@/testing/fake-data/itemcards"
 import { CARD_CATEGORY } from "@/src/features/calendar/types/ListModeCard"
 
 export const ListMode = () => {
@@ -18,22 +18,19 @@ export const ListMode = () => {
         <>        
         <View style={[styles.container]}>
             <Text style={[globalStyles.sectionHeadingText, styles.verticalMargin]}> Tasks </Text>
-            {[...ItemCardFakeData].map(({id, color, title, subtitle, footer, type}) => (
-                type == CARD_CATEGORY.Task? 
-                    <ListModeCard key={id} color={color} title={title} subtitle={subtitle} footer={footer}/> 
-                : null ))}
+            {[...TasksFakeData].map(({id, color, name, description, dueDate}) => (
+                <ListModeCard key={id} color={color} title={name} subtitle={dueDate} footer={description}/> 
+            ))}
 
             <Text style={[globalStyles.sectionHeadingText, styles.verticalMargin]}> Events </Text>
-            {[...ItemCardFakeData].map(({id, color, title, subtitle, footer, type}) => (
-                type == CARD_CATEGORY.Event? 
-                    <ListModeCard key={id} color={color} title={title} subtitle={subtitle} footer={footer}/> 
-                : null ))}
+            {[...EventsFakeData].map(({id, color, name, initialDate, description}) => (
+                <ListModeCard key={id} color={color} title={name} subtitle={initialDate} footer={description}/> 
+            ))}
 
             <Text style={[globalStyles.sectionHeadingText, styles.verticalMargin]}> Courses </Text>
-            {[...ItemCardFakeData].map(({id, color, title, subtitle, footer, type}) => (
-                type == CARD_CATEGORY.Course? 
-                    <ListModeCard key={id} color={color} title={title} subtitle={subtitle} footer={footer}/> 
-                : null ))}
+            {[...CoursesFakeData].map(({id, color, name, startTime, endTime, location}) => (
+                <ListModeCard key={id} color={color} title={name} subtitle={startTime} footer={location}/> 
+            ))}
         </View>
         </>
     )

@@ -16,7 +16,6 @@ import { DateSelection } from "@/src/features/calendar/components/DateSelection"
 import { useThemeContext } from "@/src/shared/state/themeProvider";
 
 const Calendar = ({navigation} : any) => {
-
     enum calendarMode {
         ListMode, DayMode, WeekMode
     }
@@ -25,6 +24,7 @@ const Calendar = ({navigation} : any) => {
     const [isDayMode, setDayMode] = useState(false);
     const [isWeekMode, setWeekMode] = useState(false);
 
+    // Not used right now!
     const setCalendarMode = (mode : calendarMode) => {
         setListMode(mode == calendarMode.ListMode)
         setDayMode(mode == calendarMode.DayMode);

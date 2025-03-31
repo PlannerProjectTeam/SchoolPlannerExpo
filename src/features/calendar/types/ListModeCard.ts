@@ -8,5 +8,7 @@ export interface LIST_MODE_CARD {
     title: string
     subtitle: string
     footer: string
+    date: string // Format: YYYY-MM-DD
+    duration: number // Minutes
     type: CARD_CATEGORY
 }
