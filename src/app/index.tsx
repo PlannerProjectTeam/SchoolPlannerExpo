@@ -7,12 +7,12 @@
 import React from 'react';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Calendar from '@/src/features/calendar/screens/Calendar.tsx';
-import Profile from '@/src/features/profile/screens/Profile.tsx';
-import EditTask from '@/src/features/tasks/screens/EditTask.tsx';
-import EditEvent from '@/src/features/events/screens/EditEvent.tsx';
-import Courses from '@/src/features/courses/screens/Courses.tsx';
-import { ThemeProvider } from '@/src/shared/state/themeProvider';
+import Calendar from '../features/calendar/screens/Calendar.tsx';
+import Profile from '../features/profile/screens/Profile.tsx';
+import EditTask from '../features/tasks/screens/EditTask.tsx';
+import EditEvent from '../features/events/screens/EditEvent.tsx';
+import Courses from '../features/courses/screens/Courses.tsx';
+import { ThemeProvider } from '../shared/state/themeProvider';
 
 export type RootStackParameters = {
   Calendar: undefined;
