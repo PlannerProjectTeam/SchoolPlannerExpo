@@ -6,7 +6,7 @@
 
 import React, { useState } from "react";
 import { NavigationProp } from '@react-navigation/native';
-import { RootStackParameters } from "@/src/app/_layout";
+import { RootStackParameters } from "@/src/appeee/_layout";
 import { StyleProp, ViewStyle, LayoutRectangle } from "react-native";
 import { View, Text, StyleSheet, Dimensions, Pressable } from 'react-native'
 import { Colors } from "@/src/shared/style/globalStyles";

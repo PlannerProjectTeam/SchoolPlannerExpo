@@ -1,17 +1,21 @@
 {
   "extends": "expo/tsconfig.base.json",
   "compilerOptions": {
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "allowImportingTsExtensions": true,
     "strict": true,
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["./*"]
     }
   },
   "include": [
     "**/*.ts",
     "**/*.tsx",
     ".expo/types/**/*.ts",
-    "expo-env.d.ts", 
-    "src/features/profile/helpers/handlePFPUpload.js", "src/features/profile/types/reminderIntervals.ts", "src/features/calendar/types/ListModeCard.ts"  ]
+    "expo-env.d.ts",
+    "src/features/profile/helpers/handlePFPUpload.js",
+    "src/features/profile/types/reminderIntervals.ts",
+    "src/features/calendar/types/ListModeCard.ts"
+  ]
 }

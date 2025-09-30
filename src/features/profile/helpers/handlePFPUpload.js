@@ -5,30 +5,37 @@
  */
 
 import * as DocumentPicker from 'expo-document-picker';
-import * as FileSystem from 'expo-file-system';
+import { File } from 'expo-file-system';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { DefaultProfileImage } from '@/src/assets/images/images';
 
-const PROFILE_PICTURE_KEY = "userProfilePicture";
+const PROFILE_PICTURE_KEY = 'userProfilePicture';
 
 export const uploadProfilePicture = async () => {
-    try {
-        const result = await DocumentPicker.getDocumentAsync({ type: "image/*" });
-        if (!result.canceled && result.assets != null && result.assets.length > 0) {
-            const pickedAsset = result.assets[0];
-            const newPath = `${FileSystem.cacheDirectory}${pickedAsset.name}`;
-            await FileSystem.copyAsync({ from: pickedAsset.uri, to: newPath });
-            await AsyncStorage.setItem(PROFILE_PICTURE_KEY, newPath);
-        }
-    } catch (err) {}
+  try {
+    const result = await DocumentPicker.getDocumentAsync({ type: 'image/*' });
+    if (!result.canceled && result.assets != null && result.assets.length > 0) {
+      const pickedAsset = result.assets[0];
+      const newPath = `${FileSystem.cacheDirectory}${pickedAsset.name}`;
+      await FileSystem.copyAsync({ from: pickedAsset.uri, to: newPath });
+      await AsyncStorage.setItem(PROFILE_PICTURE_KEY, newPath);
+    }
+  } catch (err) {}
 };
 
-export const getProfilePicture = async () => { 
-    const storedUri = await AsyncStorage.getItem(PROFILE_PICTURE_KEY);
-    const fileInfo = await FileSystem.getInfoAsync(storedUri);
-    if (fileInfo.exists) {
-        return { uri: storedUri };
-    } else {
-        return DefaultProfileImage;
-    }
+export const getProfilePicture = async () => {
+  const storedUri = await AsyncStorage.getItem(PROFILE_PICTURE_KEY);
+  if (!storedUri) return null;
+
+  // Create a File instance
+  const file = new File(storedUri);
+
+  // Instead of getInfoAsync, call file.getInfoAsync()
+  const fileInfo = await file.getInfoAsync();
+
+  if (fileInfo.exists) {
+    return { uri: storedUri };
+  } else {
+    return null;
+  }
 };
