@@ -27,12 +27,6 @@ import { DateSelection } from '@/src/features/calendar/components/DateSelection'
 import { useThemeContext } from '@/src/shared/state/themeProvider';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-<<<<<<< HEAD
-const Calendar = ({navigation} : any) => {
-    enum calendarMode {
-        ListMode, DayMode, WeekMode
-    }
-=======
 const Calendar = ({ navigation }: any) => {
   enum calendarMode {
     ListMode,
@@ -43,7 +37,6 @@ const Calendar = ({ navigation }: any) => {
   const [isListMode, setListMode] = useState(true);
   const [isDayMode, setDayMode] = useState(false);
   const [isWeekMode, setWeekMode] = useState(false);
->>>>>>> main
 
   const setCalendarMode = (mode: calendarMode) => {
     setListMode(mode == calendarMode.ListMode);
@@ -51,16 +44,7 @@ const Calendar = ({ navigation }: any) => {
     setWeekMode(mode == calendarMode.WeekMode);
   };
 
-<<<<<<< HEAD
-    // Not used right now!
-    const setCalendarMode = (mode : calendarMode) => {
-        setListMode(mode == calendarMode.ListMode)
-        setDayMode(mode == calendarMode.DayMode);
-        setWeekMode(mode == calendarMode.WeekMode);
-    }
-=======
   const { currentTheme, setCurrentTheme } = useThemeContext();
->>>>>>> main
 
   return (
     <>
